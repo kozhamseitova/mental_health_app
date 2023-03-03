@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>470039689764-r5rhjdpb01cnne7jrovrln9p5a34bj81.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.470039689764-r5rhjdpb01cnne7jrovrln9p5a34bj81</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>470039689764-qvjjdlohd5r669e4g4bc87p8n61cnd6v.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDP5BggEXrNwRA6rFYoQRBevDzxIJN29jg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>470039689764</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mentalHealthApp</string>
+	<key>PROJECT_ID</key>
+	<string>mentalhealthapp-bcffd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mentalhealthapp-bcffd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:470039689764:ios:78e5e5147a707bd091b6b1</string>
+</dict>
+</plist>

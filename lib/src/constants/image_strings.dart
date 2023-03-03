@@ -1,0 +1,1 @@
+const String tWelcomePageImage = "assets/images/welcome_page/background.png";
