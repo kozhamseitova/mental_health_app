@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:mental_health_app/firebase_options.dart';
+import 'package:mental_health_app/src/constants/colors.dart';
+import 'package:mental_health_app/src/features/authentication/screens/login/login_screen.dart';
+import 'package:mental_health_app/src/features/authentication/screens/register/register_screen.dart';
 import 'package:mental_health_app/src/features/authentication/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -16,8 +21,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      // defaultTransition: Transition.leftToRightWithFade,
+      // transitionDuration: const Duration(milliseconds: 500),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,9 +36,10 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: primary,
+        brightness: Brightness.dark,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const WelcomeScreen(),
     );
   }
 }
@@ -68,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+      MaterialPageRoute(builder: (context) => const RegisterScreen()),
     );
   }
 

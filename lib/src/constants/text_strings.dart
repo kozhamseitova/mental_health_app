@@ -1,6 +1,56 @@
+
+//welcome Page
 const String tWelcomeTitle = "Добро пожаловать";
 const String tWelcomeSubTitle = "Медитируй. Расслабляйся. Отдыхай.";
 
 const String tLogin = "Войти";
-const String tHaveAccountQ = "Нету аккаунта?";
+const String tHaveAccountQ = "Нету аккаунта? ";
 const String tSignUp = "Зарегистрироваться";
+
+//Login Page
+const String tLoginSubTitle = "Войдите с помощью вашего email адреса, чтобы получить доступ к приложению";
+const String tEmail = "Email адрес";
+const String tPassword = "Пароль";
+const String tForgetPassword = "Забыли пароль?";
+
+//Forget Password
+const String tForgetPasswordTitle = "Востанавление пароля";
+const String tForgetPasswordSubTitle = "Введите ваш email с которым вы зарегистрировались на нашей платформе";
+const String tForgetPasswordButton = "Сбросить пароль";
+const String tForgetPasswordBack = "Вернуться назад";
+
+//Register Page
+const String tRegisterSubTitle = "Зарегистрируйся и получи доступ к приложению";
+const String tName = "Имя";
+const String tHaveAccount = "Уже есть аккаунт? ";
+const String tPsychologist = "Я психолог";
+
+//Home Page
+const String tHomePageTitle = "Доброе утро, ";
+const String tHomePageSubTitle = "Как ваше настроение?";
+const String tMeditationTime = "минут медитирования";
+const String tPopularAudio = "Часто прослушиваемое аудио";
+const String tPremiumTitle = "Premium аккаунт";
+const String tPremiumSubTitle = "Получите доступ к большему количеству аудиозаписей.";
+const String tDailyMeditationTitle = "Ежедневная медитация";
+const String tRecommendationTitle = "Рекомендации";
+
+//Meditation Zone Page
+const String tMeditationZoneTitle = "Зона медитации";
+const String tMeditationZoneSubTitle = "Сядьте поудобнее, расслабьтесь и позвольте успокаивающим звукам привести вас в состояние глубокого расслабления и внутреннего покоя.";
+const String tRecentlyPlayed = "Недавно прослушанные";
+const String tAudioListForMeditation = "Аудио для медитации";
+
+//Sleep Zone Page
+const String tSleepZoneTitle = "Зона сна";
+const String tSleepZoneSubTitle = "Мы предлагаем специально подобранные звуки, которые помогут вам расслабиться и забыть о повседневных проблемах.";
+const String tBedTimeStories = "Сказки на ночь";
+const String tAudioListForSleep = "Аудио для сна";
+
+//Profile Page
+const String tHello = "Привет, ";
+const String tListened = "Прослушено";
+const String tMinutes = "минут";
+const String tFinished = "Пройдено";
+const String tSessions = "сессий";
+const String tFavourites = "Избранное";
