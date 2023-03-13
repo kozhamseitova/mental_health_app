@@ -28,7 +28,8 @@ const String tPsychologist = "Я психолог";
 //Home Page
 const String tHomePageTitle = "Доброе утро, ";
 const String tHomePageSubTitle = "Как ваше настроение?";
-const String tMeditationTime = "минут медитирования";
+const String tMeditationTimeTitle = " минут";
+const String tMeditationTimeSubTitle = "медитирования";
 const String tPopularAudio = "Часто прослушиваемое аудио";
 const String tPremiumTitle = "Premium аккаунт";
 const String tPremiumSubTitle = "Получите доступ к большему количеству аудиозаписей.";

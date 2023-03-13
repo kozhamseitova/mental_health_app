@@ -19,44 +19,49 @@ class ForgetPasswordScreen extends StatelessWidget {
     final controller = Get.put(FadeInAnimationController());
     controller.startAnimation();
 
+
+    var heightScreen = MediaQuery.of(context).size.height;
     var widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: cBackgroundColor,
-      body: Center(
-        child: Container(
-          width: widthScreen * 0.85,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image(image: AssetImage(tForgetPasswordImage)),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: tEmail,
-                    hintText: tEmail,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 1.0, color: Colors.grey),
-                    ),),
-                ),
-                Column(
-                  children: [
-                    ElevatedButton(style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(Size(275, 60)),
-                      backgroundColor: MaterialStateProperty.all(cButtonColor),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            height: heightScreen,
+            width: widthScreen * 0.85,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image(image: AssetImage(tForgetPasswordImage)),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.person_outline_outlined),
+                      labelText: tEmail,
+                      hintText: tEmail,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                      ),),
+                  ),
+                  Column(
+                    children: [
+                      ElevatedButton(style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(275, 60)),
+                        backgroundColor: MaterialStateProperty.all(cButtonColor),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
+                      ), onPressed: (){ }, child: Text(tForgetPasswordButton, style: tsButton,)),
+                      TextButton(
+                        onPressed: () { Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen())); },
+                        child: Text(tForgetPasswordBack, style: tsForgetPassword,),
                       ),
-                    ), onPressed: (){ }, child: Text(tForgetPasswordButton, style: tsButton,)),
-                    TextButton(
-                      onPressed: () { Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen())); },
-                      child: Text(tForgetPasswordBack, style: tsForgetPassword,),
-                    ),
-                  ],
-                ),
-              ]),
+                    ],
+                  ),
+                ]),
+          ),
         ),
       ),
     );

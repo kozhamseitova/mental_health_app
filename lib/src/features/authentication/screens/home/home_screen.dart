@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
 import 'package:mental_health_app/src/features/authentication/screens/home/recommendations.dart';
@@ -14,97 +17,110 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var heightScreen = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
-        height: heightScreen,
-        decoration: BoxDecoration(
-        image:
-          DecorationImage(
-            image: AssetImage(tWelcomePageImage),
-            fit: BoxFit.cover
+    return SafeArea(
+      child: Scaffold(
+          body: Container(
+          height: heightScreen,
+          decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(tWelcomePageImage), fit: BoxFit.cover),
           ),
-        ),
-        child:
-          SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        tHomePageTitle,
-                        style: tsHomePageTitle,
-                      ),
-                      Text(
-                        name,
-                        style: tsHomePageTitle,
-                      )
-                    ],
-                  ),
-                  Text(
-                    tHomePageSubTitle,
-                    style: tsHomePageSubTitle,
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: 141,
-                    height: 224,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(tHomePageMeditation),
-                      ),
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          tHomePageTitle,
+                          style: tsHomePageTitle,
+                        ),
+                        Text(
+                          name,
+                          style: tsHomePageTitle,
+                        )
+                      ],
                     ),
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        width: 188,
-                        height: 139,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(tHomePageAudio),
-                          ),
+                    Row(
+                      children: [
+                        Text(
+                          tHomePageSubTitle,
+                          style: tsHomePageSubTitle,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 141,
+                      height: 224,
+                        padding: EdgeInsets.only(top: tDefaultSizeS, left: tDefaultSizeS),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(tHomePageMeditation),
                         ),
                       ),
-                      Container(
-                        width: 188,
-                        height: 76,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(tHomePagePremium),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(minutesOfMeditation + tMeditationTimeTitle, style: tsHomePageMeditationTitle,),
+                          Text(tMeditationTimeSubTitle, style: tsHomePageMeditationSubTitle,)
+                        ],
+                      )
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: 188,
+                          height: 139,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(tHomePageAudio),
+                            ),
                           ),
                         ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    tDailyMeditationTitle,
-                    style: tsHomePageTitle,
-                  ),
-                  Container(
-                    width: 350,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(tHomePageDailyAudio),
+                        SizedBox(
+                          height: 9,
+                        ),
+                        Container(
+                          width: 188,
+                          height: 76,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(tHomePagePremium),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      tDailyMeditationTitle,
+                      style: tsHomePageTitle,
+                    ),
+                    Container(
+                      width: 350,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(tHomePageDailyAudio),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Recommendations()
-            ],
-          )
-        ),
-      )
+                  ],
+                ),
+                Recommendations()
+              ],
+            )
+          ),
+      )),
     );
   }
 }

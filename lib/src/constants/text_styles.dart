@@ -18,4 +18,6 @@ const TextStyle tsPsychologist = TextStyle(color: Colors.grey, fontSize: 13, fon
 
 const TextStyle tsHomePageTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 const TextStyle tsHomePageSubTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+const TextStyle tsHomePageMeditationTitle = TextStyle(color: cItemColor, fontSize: 20, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsHomePageMeditationSubTitle = TextStyle(color: cItemColor, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
 
