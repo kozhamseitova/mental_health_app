@@ -6,6 +6,7 @@ import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/features/authentication/screens/home/home_screen.dart';
 import 'package:mental_health_app/src/features/authentication/screens/login/forgetPassword/forget_password_screen.dart';
+import 'package:mental_health_app/src/features/authentication/screens/main/main_screen_widget.dart';
 import 'package:mental_health_app/src/features/authentication/screens/register/register_screen.dart';
 
 import '../../../../constants/text_styles.dart';
@@ -94,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ), onPressed: (){ Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen())); }, child: Text(tLogin, style: tsButton,)),
+                      ), onPressed: (){ Navigator.push(context,MaterialPageRoute(builder: (context) => MainScreenWidget())); }, child: Text(tLogin, style: tsButton,)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -27,6 +27,11 @@ class MyApp extends StatelessWidget {
       // defaultTransition: Transition.leftToRightWithFade,
       // transitionDuration: const Duration(milliseconds: 500),
       theme: ThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: cItemColor,
+          unselectedItemColor: cIconColor,
+          selectedItemColor: cSelectedIconColor,
+        ),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
