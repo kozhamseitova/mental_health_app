@@ -4,12 +4,12 @@ import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
-import 'package:mental_health_app/src/features/authentication/screens/home/home_screen.dart';
-import 'package:mental_health_app/src/features/authentication/screens/login/forgetPassword/forget_password_screen.dart';
-import 'package:mental_health_app/src/features/authentication/screens/main/main_screen_widget.dart';
-import 'package:mental_health_app/src/features/authentication/screens/register/register_screen.dart';
+import 'package:mental_health_app/src/features/screens/home/home_screen.dart';
+import 'package:mental_health_app/src/features/screens/login/forgetPassword/forget_password_screen.dart';
+import 'package:mental_health_app/src/features/screens/main/main_screen_widget.dart';
+import 'package:mental_health_app/src/features/screens/register/register_screen.dart';
 
-import '../../../../constants/text_styles.dart';
+import '../../../constants/text_styles.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

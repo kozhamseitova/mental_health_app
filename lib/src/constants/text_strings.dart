@@ -30,9 +30,9 @@ const String tHomePageTitle = "Доброе утро, ";
 const String tHomePageSubTitle = "Как ваше настроение?";
 const String tMeditationTimeTitle = " минут";
 const String tMeditationTimeSubTitle = "медитирования";
-const String tPopularAudio = "Часто прослушиваемое аудио";
+const String tPopularAudio = "Часто прослушиваемое\nаудио";
 const String tPremiumTitle = "Premium аккаунт";
-const String tPremiumSubTitle = "Получите доступ к большему количеству аудиозаписей.";
+const String tPremiumSubTitle = "Получите доступ к\nбольшему количеству\nаудиозаписей.";
 const String tDailyMeditationTitle = "Ежедневная медитация";
 const String tRecommendationTitle = "Рекомендации";
 
@@ -44,14 +44,24 @@ const String tAudioListForMeditation = "Аудио для медитации";
 
 //Sleep Zone Page
 const String tSleepZoneTitle = "Зона сна";
-const String tSleepZoneSubTitle = "Мы предлагаем специально подобранные звуки, которые помогут вам расслабиться и забыть о повседневных проблемах.";
+const String tSleepZoneSubTitle = "Слушайте специально\nподобранные звуки,\nчтобы расслабиться и\nзабыть о повседневных\nпроблемах.";
 const String tBedTimeStories = "Сказки на ночь";
 const String tAudioListForSleep = "Аудио для сна";
 
 //Profile Page
 const String tHello = "Привет, ";
 const String tListened = "Прослушено";
-const String tMinutes = "минут";
+const String tMinutes = " минут";
 const String tFinished = "Пройдено";
-const String tSessions = "сессий";
+const String tSessions = " сессий";
 const String tFavourites = "Избранное";
+const String tRequests = "Ваши заявки";
+
+const String tHelloDoctor = "Здравствуйте, ";
+const String tIncoming = "Входящие";
+const String tAccepted = "Принятые";
+
+const String tAppointmentRequestTitle = "Запись к психологу";
+const String tAppointmentRequestSubTitle = "Ознакомтесь со списком опытных и профессиональных психологов. ";
+const String tApply = "Оставить заявку";
+

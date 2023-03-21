@@ -8,7 +8,7 @@ import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/authentication/screens/login/login_screen.dart';
+import 'package:mental_health_app/src/features/screens/login/login_screen.dart';
 
 import '../register/register_screen.dart';
 

@@ -5,9 +5,9 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:mental_health_app/firebase_options.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
-import 'package:mental_health_app/src/features/authentication/screens/login/login_screen.dart';
-import 'package:mental_health_app/src/features/authentication/screens/register/register_screen.dart';
-import 'package:mental_health_app/src/features/authentication/screens/welcome/welcome_screen.dart';
+import 'package:mental_health_app/src/features/screens/login/login_screen.dart';
+import 'package:mental_health_app/src/features/screens/register/register_screen.dart';
+import 'package:mental_health_app/src/features/screens/welcome/welcome_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -5,11 +5,11 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/authentication/screens/login/login_screen.dart';
+import 'package:mental_health_app/src/features/screens/login/login_screen.dart';
 
-import '../../../../../common_widgets/fade_in_animation/animation_controller.dart';
-import '../../../../../common_widgets/fade_in_animation/animation_design.dart';
-import '../../../../../constants/image_strings.dart';
+import '../../../../common_widgets/fade_in_animation/animation_controller.dart';
+import '../../../../common_widgets/fade_in_animation/animation_design.dart';
+import '../../../../constants/image_strings.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({Key? key}) : super(key: key);

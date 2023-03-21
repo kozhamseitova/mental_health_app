@@ -65,6 +65,11 @@ flutter:
     - assets/images/login_page/
     - assets/images/forgot_password_page/
     - assets/images/home_page/
+    - assets/images/meditation_page/
+    - assets/images/sleep_page/
+    - assets/images/user_profile_page/
+    - assets/images/doctor_profile_page/
+    - assets/images/appointment_request_page/
 
   fonts:
     - family: Lobster
@@ -73,6 +78,9 @@ flutter:
     - family: Rubik
       fonts:
         - asset: assets/fonts/Rubik-Regular.ttf
+    - family: HomeIcon
+      fonts:
+        - asset: assets/fonts/HomeIcon.ttf
 
 
 flutter_native_splash:

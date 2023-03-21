@@ -17,7 +17,33 @@ const TextStyle tsForgetPassword = TextStyle(color: cSubTextColor, fontSize: 12,
 const TextStyle tsPsychologist = TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 
 const TextStyle tsHomePageTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
-const TextStyle tsHomePageSubTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+const TextStyle tsHomePageSubTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w100, fontFamily: 'Rubik');
 const TextStyle tsHomePageMeditationTitle = TextStyle(color: cItemColor, fontSize: 20, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
-const TextStyle tsHomePageMeditationSubTitle = TextStyle(color: cItemColor, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsHomePageMeditationSubTitle = TextStyle(color: cItemColor, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsHomePageItemTitle = TextStyle(color: cItemColor, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsHomePageItemSubTitle = TextStyle(color: cItemColor, fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsHomePageDailyMeditationTitle = TextStyle(color: cTextColor, fontSize: 17, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsHomePageDailyMeditationSubTitle = TextStyle(color: cTextColor, fontSize: 17, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
 
+const TextStyle tsMeditationPageTitle = TextStyle(color: cTextColor, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Rubik');
+const TextStyle tsMeditationPageSubTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+
+const TextStyle tsAudioGroupTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsAudioTitle = TextStyle(color: cTextColor, fontSize: 15, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+const TextStyle tsAudioSubTitle = TextStyle(color: cSubTextColor, fontSize: 13, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+
+const TextStyle tsStoryTitle = TextStyle(color: cTextColor, fontSize: 12, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsStorySubTitle = TextStyle(color: cSubTextColor, fontSize: 10, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+
+const TextStyle tsProfilePageTitle = TextStyle(color: cTextColor, fontSize: 24, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsProfilePageSubTitle = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsProfilePageContainerText = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+
+const TextStyle tsRequestTitle = TextStyle(color: cTextColor, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsRequestSubTitle = TextStyle(color: cTextColor, fontSize: 13, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsRequestAccepted = TextStyle(color: cAcceptedRequest, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsRequestGroupTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+
+const TextStyle tsAppRequestPageTitle = TextStyle(color: cAppRequestPageTitle, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Rubik');
+const TextStyle tsAppRequestPageSubTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+const TextStyle tsApply = TextStyle(color: cTextColor, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
