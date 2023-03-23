@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: cItemColor,
           unselectedItemColor: cIconColor,
           selectedItemColor: cSelectedIconColor,
+          type: BottomNavigationBarType.fixed
         ),
         // This is the theme of your application.
         //

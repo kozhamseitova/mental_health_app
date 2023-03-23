@@ -27,13 +27,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    UserProfileScreen(),
-    // DoctorProfileScreen(),
+    HomeScreen(),
+    MeditationScreen(),
+    SleepScreen(),
     AppointmentRequestScreen(),
-    // HomeScreen(),
-    // MeditationScreen(),
-    // SleepScreen()
-    // Text("Hello!"),
+    UserProfileScreen(),
   ];
 
   void onSelectTab(int index) {
@@ -50,10 +48,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         backgroundColor: cBackgroundColor,
         body: _widgetOptions[_selectedTab],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: cItemColor,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
           currentIndex: _selectedTab,
           items: const [
             BottomNavigationBarItem(icon: Icon(HomeIcon.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.account_box_rounded), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.play_circle_outline), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.nights_stay_outlined), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.medical_information_outlined), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: ''),
           ],
           onTap: onSelectTab,
         )
