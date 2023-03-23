@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
+import 'package:mental_health_app/src/features/auth.dart';
 import 'package:mental_health_app/src/features/screens/appointment_request/appointment_request_screen.dart';
 import 'package:mental_health_app/src/features/screens/home/home_screen.dart';
 import 'package:mental_health_app/src/features/screens/main/home_icon_icons.dart';
@@ -16,6 +18,13 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
+
+  final User? user = Auth().currentUser;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
   int _selectedTab = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     UserProfileScreen(),

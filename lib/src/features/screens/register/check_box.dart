@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 
 class CheckBoxR extends StatefulWidget {
-  const CheckBoxR({super.key});
+  const CheckBoxR({
+    Key? key,
+    required this.callback,
+  }) : super(key: key);
+
+  final Function(bool) callback;
 
   @override
   State<CheckBoxR> createState() => _CheckBox();
@@ -24,11 +29,11 @@ class _CheckBox extends State<CheckBoxR> {
       checkColor: Colors.white,
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       onChanged: (bool? value) {
         setState(() {
-          isChecked = value!;
+          widget.callback(value!);
+          isChecked = value;
         });
       },
     );

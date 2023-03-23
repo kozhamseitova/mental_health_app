@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mental_health_app/src/features/auth.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
@@ -11,15 +12,56 @@ import 'package:mental_health_app/src/features/screens/register/register_screen.
 
 import '../../../constants/text_styles.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String? errorMessage = '';
+  bool isLogin = true;
+
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
+          email: _controllerEmail.text, password: _controllerPassword.text);
+      if (context.mounted) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const MainScreenWidget()));
+      }
+    } on FirebaseAuthException catch(e) {
+      showDialog(context: context, builder: (ctx) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text("Ошибка авторизации"),
+          content: Text("Почта или пароль введены неверно. Пожалуйста, попробуйте еще"),
+          actions: <Widget>[
+            TextButton(onPressed: () {
+              Navigator.of(ctx).pop();
+            }, child: Text("OK"))
+          ],
+        );
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    var widthScreen = MediaQuery.of(context).size.width;
-
-    var heightScreen = MediaQuery.of(context).size.height;
+    var widthScreen = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var heightScreen = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     return SafeArea(
       child: Scaffold(
@@ -33,12 +75,12 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image(
+                  const Image(
                     image: AssetImage(tWelcomePageImageSunrise),
                     height: 130,
                   ),
                   Column(
-                    children: [
+                    children: const [
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -61,8 +103,10 @@ class LoginScreen extends StatelessWidget {
                           labelText: tEmail,
                           hintText: tEmail,
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                            borderSide: BorderSide(
+                                width: 1.0, color: Colors.grey),
                           ),),
+                        controller: _controllerEmail,
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
@@ -70,18 +114,24 @@ class LoginScreen extends StatelessWidget {
                           labelText: tPassword,
                           hintText: tPassword,
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                            borderSide: BorderSide(
+                                width: 1.0, color: Colors.grey),
                           ),
                           suffixIcon: IconButton(
                             onPressed: null,
                             icon: Icon(Icons.remove_red_eye_sharp),
                           ),
                         ),
+                        controller: _controllerPassword,
                       ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: (){ Navigator.push(context,MaterialPageRoute(builder: (context) => ForgetPasswordScreen())); }, child: Text(tForgetPassword)),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) =>
+                                      ForgetPasswordScreen()));
+                            }, child: const Text(tForgetPassword)),
                       ),
                     ],
                   ),
@@ -89,19 +139,25 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       ElevatedButton(style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(275, 60)),
-                        backgroundColor: MaterialStateProperty.all(cButtonColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            cButtonColor),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ), onPressed: (){ Navigator.push(context,MaterialPageRoute(builder: (context) => MainScreenWidget())); }, child: Text(tLogin, style: tsButton,)),
+                      ), onPressed: () {
+                        signInWithEmailAndPassword();
+                      }, child: Text(tLogin, style: tsButton,)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(tHaveAccountQ, style: tsHaveAccount,),
                           TextButton(
-                            onPressed: () { Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterScreen())); },
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()));
+                            },
                             child: Text(tSignUp, style: tsSignInSmall,),
                           ),
                         ],
@@ -120,3 +176,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+
