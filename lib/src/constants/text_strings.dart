@@ -65,3 +65,7 @@ const String tAppointmentRequestTitle = "Запись к психологу";
 const String tAppointmentRequestSubTitle = "Ознакомтесь со списком опытных и профессиональных психологов. ";
 const String tApply = "Оставить заявку";
 
+const String tDialog = "Оставьте свой номер телефона и врач свяжется с вами";
+const String tPhone = "Телефон";
+const String tProblem = "Ваша проблема";
+

@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -25,6 +26,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+
+
+  bool passwordVisible = false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible = true;
+  }
+
 
   Future<void> signInWithEmailAndPassword() async {
     try {
@@ -62,6 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
         .of(context)
         .size
         .height;
+
+
 
     return SafeArea(
       child: Scaffold(
@@ -109,7 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _controllerEmail,
                       ),
                       TextFormField(
-                        decoration: const InputDecoration(
+                        obscureText: passwordVisible,
+                        decoration: InputDecoration(
                           prefixIcon: Icon(Icons.fingerprint),
                           labelText: tPassword,
                           hintText: tPassword,
@@ -118,8 +132,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 1.0, color: Colors.grey),
                           ),
                           suffixIcon: IconButton(
-                            onPressed: null,
-                            icon: Icon(Icons.remove_red_eye_sharp),
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                            icon: Icon(passwordVisible ? Icons.remove_red_eye_sharp : Icons.visibility_off_sharp),
                           ),
                         ),
                         controller: _controllerPassword,

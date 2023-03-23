@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mental_health_app/src/features/auth.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+
+  bool passwordVisible = false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible = true;
+  }
 
   Future<void> createUserWithEmailAndPassword() async {
     try {
@@ -114,7 +121,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _controllerEmail,
                       ),
                       TextFormField(
-                        decoration: const InputDecoration(
+                        obscureText: passwordVisible,
+                        decoration: InputDecoration(
                           prefixIcon: Icon(Icons.fingerprint),
                           labelText: tPassword,
                           hintText: tPassword,
@@ -122,8 +130,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderSide: BorderSide(width: 1.0, color: Colors.grey),
                           ),
                           suffixIcon: IconButton(
-                            onPressed: null,
-                            icon: Icon(Icons.remove_red_eye_sharp),
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                            icon: Icon(passwordVisible ? Icons.remove_red_eye_sharp : Icons.visibility_off_sharp),
                           ),
                         ),
                         controller: _controllerPassword,

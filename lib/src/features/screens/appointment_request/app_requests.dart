@@ -14,6 +14,45 @@ class AppRequests extends StatelessWidget {
   Widget build(BuildContext context) {
     var widthScreen = MediaQuery.of(context).size.width;
 
+    Future openDialog() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: cItemColor,
+          content: Column(
+            children: [
+              Text(tDialog),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: tPhone,
+                  hintText: tPhone,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                  ),),
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: tProblem,
+                  hintText: tProblem,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                  ),),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(tApply, style: tsApply,),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: BorderSide(width: 1, color: cIconColor),
+                    ),
+                  ),
+                ),),
+            ],
+          ),
+
+        ));
+
     return Container(
       child: ListView.builder(
           shrinkWrap: true,
@@ -48,7 +87,7 @@ class AppRequests extends StatelessWidget {
                           Container(
                             width: widthScreen * 0.5,
                             child: TextButton(
-                              onPressed: () { },
+                              onPressed: () { openDialog(); },
                               child: Text(tApply, style: tsApply,),
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all(
@@ -70,5 +109,8 @@ class AppRequests extends StatelessWidget {
           }
       ),
     );
+
+
+
   }
 }
