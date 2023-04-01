@@ -46,6 +46,8 @@ dependencies:
   flutter_native_splash: ^2.2.18
   get:
   cloud_firestore: ^4.4.5
+  provider: ^6.0.5
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

@@ -4,7 +4,8 @@ import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 
-import '../../../constants/text_styles.dart';
+import '../../constants/text_styles.dart';
+
 
 class AudioItem extends StatefulWidget {
   const AudioItem({Key? key}) : super(key: key);

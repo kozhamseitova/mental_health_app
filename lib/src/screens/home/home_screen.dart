@@ -1,13 +1,14 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/screens/home/recommendations.dart';
+import 'package:mental_health_app/src/screens/home/recommendations.dart';
 
-import '../../../constants/image_strings.dart';
+import '../../constants/image_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var heightScreen = MediaQuery.of(context).size.height;
     var widthScreen = MediaQuery.of(context).size.width;
+
     return Container(
       height: heightScreen,
       width: widthScreen,
@@ -43,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                       style: tsHomePageTitle,
                     ),
                     Text(
-                      name,
+                      tHomePageSubTitle,
                       style: tsHomePageTitle,
                     )
                   ],

@@ -4,11 +4,12 @@ import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/screens/components/audio.dart';
-import 'package:mental_health_app/src/features/screens/components/audios.dart';
+import 'package:mental_health_app/src/screens/sleep/stories.dart';
 
-class MeditationScreen extends StatelessWidget {
-  const MeditationScreen({Key? key}) : super(key: key);
+import '../components/audios.dart';
+
+class SleepScreen extends StatelessWidget {
+  const SleepScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +24,27 @@ class MeditationScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: tDefaultSizeM, left: tDefaultSizeM, bottom: tDefaultSizeL),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(tMeditationZoneImage),
-                fit: BoxFit.fill
+                  image: AssetImage(tSleepZoneImage),
+                  fit: BoxFit.fill
               ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tMeditationZoneTitle, style: tsMeditationPageTitle,),
+                Text(tSleepZoneTitle, style: tsMeditationPageTitle,),
                 SizedBox(
                   height: tDefaultSizeS,
                 ),
-                Text(tMeditationZoneSubTitle, style: tsMeditationPageSubTitle)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(image: AssetImage(tSleepZoneIcon),
+                    height: heightScreen * 0.17,),
+                    SizedBox(width: 10,),
+                    Text(tSleepZoneSubTitle, style: tsMeditationPageSubTitle)
+                  ],
+                )
               ],
             ),
           ),
@@ -48,18 +57,16 @@ class MeditationScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(tRecentlyPlayed, style: tsAudioGroupTitle),
+                    Text(tBedTimeStories, style: tsAudioGroupTitle),
                     SizedBox(height: heightScreen * 0.02,),
-                    AudioItem(),
-                    SizedBox(height: heightScreen * 0.01,),
-                    AudioItem()
+                    Stories()
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: heightScreen * 0.03,),
-                    Text(tAudioListForMeditation, style: tsAudioGroupTitle),
+                    Text(tAudioListForSleep, style: tsAudioGroupTitle),
                     SizedBox(height: heightScreen * 0.02,),
                     AudioItems(),
                   ],

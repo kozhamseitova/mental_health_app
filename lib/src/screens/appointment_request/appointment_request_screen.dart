@@ -3,10 +3,8 @@ import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/screens/appointment_request/app_requests.dart';
 
-import '../../../constants/sizes.dart';
-
+import 'app_requests.dart';
 class AppointmentRequestScreen extends StatelessWidget {
   const AppointmentRequestScreen({Key? key}) : super(key: key);
 

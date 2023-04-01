@@ -8,8 +8,9 @@ import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
-import 'package:mental_health_app/src/features/screens/login/login_screen.dart';
+import 'package:mental_health_app/src/services/navigation_service.dart';
 
+import '../login/login_screen.dart';
 import '../register/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -54,14 +55,14 @@ class WelcomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ), onPressed: (){ Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen())); }, child: Text(tLogin, style: tsButton,)),
+                      ), onPressed: (){ NavigationService.instance.navigateToRoute(MaterialPageRoute(builder: (context) => LoginScreen())); }, child: Text(tLogin, style: tsButton,)),
                       SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(tHaveAccountQ, style: tsHaveAccount,),
                           TextButton(
-                            onPressed: () { Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterScreen())); },
+                            onPressed: () { NavigationService.instance.navigateToRoute(MaterialPageRoute(builder: (context) => RegisterScreen()));},
                             child: Text(tSignUp, style: tsSignInSmall,),
                           ),
                         ],

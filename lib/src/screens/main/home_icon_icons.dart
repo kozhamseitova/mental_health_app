@@ -12,6 +12,10 @@
 ///       - asset: fonts/HomeIcon.ttf
 ///
 /// 
+/// * Octicons, Copyright (C) 2020 by GitHub Inc.
+///         Author:    GitHub
+///         License:   MIT (http://opensource.org/licenses/mit-license.php)
+///         Homepage:  https://primer.style/octicons/
 ///
 import 'package:flutter/widgets.dart';
 
@@ -21,5 +25,5 @@ class HomeIcon {
   static const _kFontFam = 'HomeIcon';
   static const String? _kFontPkg = null;
 
-  static const IconData home = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home = IconData(0xf35f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

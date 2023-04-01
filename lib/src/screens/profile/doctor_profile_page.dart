@@ -1,13 +1,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_app/src/features/screens/profile/doctorRequests.dart';
-
-import '../../../constants/colors.dart';
-import '../../../constants/image_strings.dart';
-import '../../../constants/sizes.dart';
-import '../../../constants/text_strings.dart';
-import '../../../constants/text_styles.dart';
+import '../../constants/colors.dart';
+import '../../constants/image_strings.dart';
+import '../../constants/sizes.dart';
+import '../../constants/text_strings.dart';
+import '../../constants/text_styles.dart';
+import 'doctorRequests.dart';
 
 class DoctorProfileScreen extends StatefulWidget {
   const DoctorProfileScreen({Key? key}) : super(key: key);

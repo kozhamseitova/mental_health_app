@@ -2,13 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/features/auth.dart';
-import 'package:mental_health_app/src/features/screens/appointment_request/appointment_request_screen.dart';
-import 'package:mental_health_app/src/features/screens/home/home_screen.dart';
-import 'package:mental_health_app/src/features/screens/main/home_icon_icons.dart';
-import 'package:mental_health_app/src/features/screens/meditation/meditation_screen.dart';
-import 'package:mental_health_app/src/features/screens/profile/doctor_profile_page.dart';
-import 'package:mental_health_app/src/features/screens/profile/user_profile_screen.dart';
-import 'package:mental_health_app/src/features/screens/sleep/sleep_screen.dart';
+
+import '../appointment_request/appointment_request_screen.dart';
+import '../home/home_screen.dart';
+import '../meditation/meditation_screen.dart';
+import '../profile/user_profile_screen.dart';
+import '../sleep/sleep_screen.dart';
+import 'home_icon_icons.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   }
 
   int _selectedTab = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     MeditationScreen(),
     SleepScreen(),

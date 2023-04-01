@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
-import 'package:mental_health_app/src/features/screens/components/audio.dart';
+
+import 'audio.dart';
 
 class AudioItems extends StatelessWidget {
   const AudioItems({Key? key}) : super(key: key);
