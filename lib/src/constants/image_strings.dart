@@ -23,3 +23,5 @@ const String tDoctorProfileImage = "assets/images/doctor_profile_page/doctor_pro
 
 const String tAppRequestPageImage = "assets/images/appointment_request_page/app_request_image.png";
 const String tDoctor = "assets/images/appointment_request_page/doctor.png";
+const String tDialogImg = "assets/images/appointment_request_page/dialog.png";
+const String tPremiumImg = "assets/images/premium/premium.png";

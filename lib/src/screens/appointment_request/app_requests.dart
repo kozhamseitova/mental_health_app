@@ -18,40 +18,54 @@ class AppRequests extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
           backgroundColor: cItemColor,
+          contentPadding: EdgeInsets.zero,
           content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(tDialog),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: tPhone,
-                  hintText: tPhone,
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(width: 1.0, color: Colors.grey),
-                  ),),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: tProblem,
-                  hintText: tProblem,
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(width: 1.0, color: Colors.grey),
-                  ),),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(tApply, style: tsApply,),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      side: BorderSide(width: 1, color: cIconColor),
+              Image(image: AssetImage(tDialogImg)),
+              Container(
+                padding: EdgeInsets.all(tDefaultSizeM),
+                child: Column(
+                  children: [
+                    Text(tDialog),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: tPhone,
+                        hintText: tPhone,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                        ),),
                     ),
-                  ),
-                ),),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: tProblem,
+                        hintText: tProblem,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(width: 1.0, color: Colors.grey),
+                        ),),
+                    ),
+                    SizedBox(height: tDefaultSizeS,),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(tApply, style: tsApply,),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            side: BorderSide(width: 1, color: cIconColor),
+                          ),
+                        ),
+                      ),),
+                  ],
+                ),
+              )
             ],
           ),
 
         ));
+
+
+
 
     return Container(
       child: ListView.builder(

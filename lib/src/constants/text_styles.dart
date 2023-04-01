@@ -47,3 +47,8 @@ const TextStyle tsRequestGroupTitle = TextStyle(color: cTextColor, fontSize: 16,
 const TextStyle tsAppRequestPageTitle = TextStyle(color: cAppRequestPageTitle, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Rubik');
 const TextStyle tsAppRequestPageSubTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 const TextStyle tsApply = TextStyle(color: cTextColor, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+
+const TextStyle tsPremiumTitle = TextStyle(color: cAppRequestPageTitle, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Rubik');
+const TextStyle tsPremiumSubTitle = TextStyle(color: cTextColor, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: 'Rubik');
+const TextStyle tsCostWhite = TextStyle(color: cTextColor, fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'Lobster');
+const TextStyle tsCost = TextStyle(color: cAppRequestPageTitle, fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'Lobster');

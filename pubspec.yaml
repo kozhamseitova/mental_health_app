@@ -73,6 +73,7 @@ flutter:
     - assets/images/user_profile_page/
     - assets/images/doctor_profile_page/
     - assets/images/appointment_request_page/
+    - assets/images/premium/
 
   fonts:
     - family: Lobster

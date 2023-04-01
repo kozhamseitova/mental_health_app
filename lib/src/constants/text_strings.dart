@@ -69,3 +69,9 @@ const String tDialog = "Оставьте свой номер телефона и
 const String tPhone = "Телефон";
 const String tProblem = "Ваша проблема";
 
+const String tPremiumTitle2 = "Присоединяйся к premium пользователям";
+const String tPremiumSubTitle2 = "Купи премиум или получи безграничный доступ к любому аудио";
+const String tPremiumButton = "Купить";
+
+
+

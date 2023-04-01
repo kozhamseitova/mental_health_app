@@ -59,6 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
+            backgroundColor: cItemColor,
+            icon: Icon(Icons.error_outline),
+            iconColor: Colors.red,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -69,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.of(ctx).pop();
                   },
-                  child: Text("OK"))
+                  child: Text("OK", style: tsAudioSubTitle,))
             ],
           );
         });
