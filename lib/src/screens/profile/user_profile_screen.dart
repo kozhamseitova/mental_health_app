@@ -53,6 +53,12 @@ class UserProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: tDefaultSizeL,
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.exit_to_app, color: cSubTextColor,),
+                  ],
+                ),
                 Column(
                   children: [
                     Image(
