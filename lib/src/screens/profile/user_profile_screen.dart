@@ -11,6 +11,7 @@ import 'package:mental_health_app/src/screens/profile/requests.dart';
 import 'package:mental_health_app/src/services/db_service.dart';
 
 import '../../constants/text_strings.dart';
+import '../../models/request.dart';
 import '../../models/user_data.dart';
 import '../components/audios.dart';
 import '../../providers/auth_provider.dart';
@@ -25,14 +26,8 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var widthScreen = MediaQuery
-        .of(context)
-        .size
-        .width;
-    var heightScreen = MediaQuery
-        .of(context)
-        .size
-        .height;
+    var widthScreen = MediaQuery.of(context).size.width;
+    var heightScreen = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         padding: EdgeInsets.only(
             left: widthScreen * 0.05, right: widthScreen * 0.05),
@@ -48,96 +43,184 @@ class UserProfileScreen extends StatelessWidget {
           stream: DBService.instance.getUserData(_auth.user!.uid),
           builder: (context, snapshot) {
             var userData = snapshot.data;
-            return (userData == null) ? SizedBox(height: heightScreen/2, child: SpinKitWanderingCubes(color: Colors.white, size: 50,),) : Column(
-              children: [
-                SizedBox(
-                  height: tDefaultSizeL,
-                ),
-                Column(
-                  children: [
-                    Image(
-                      image: AssetImage(tUserProfileImage),
-                      height: heightScreen * 0.22,
+            return (userData == null)
+                ? SizedBox(
+                    height: heightScreen / 2,
+                    child: SpinKitWanderingCubes(
+                      color: Colors.white,
+                      size: 50,
                     ),
-                    Text(tHello + userData!.name + "!", style: tsProfilePageTitle),
-                  ],
-                ),
-                SizedBox(
-                  height: tDefaultSizeL,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      height: heightScreen * 0.23,
-                      width: heightScreen * 0.23 * 0.85,
-                      padding: EdgeInsets.all(tDefaultSizeM),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(tUserProfileListened),
-                              fit: BoxFit.fill)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  )
+                : Column(
+                    children: [
+                      SizedBox(
+                        height: tDefaultSizeL,
+                      ),
+                      Column(
                         children: [
-                          Text(tListened, style: tsProfilePageContainerText),
-                          Text(
-                            minutes + tMinutes,
-                            style: tsProfilePageContainerText,
+                          Image(
+                            image: AssetImage(tUserProfileImage),
+                            height: heightScreen * 0.22,
+                          ),
+                          Text(tHello + userData.name + "!",
+                              style: tsProfilePageTitle),
+                        ],
+                      ),
+                      SizedBox(
+                        height: tDefaultSizeL,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            height: heightScreen * 0.23,
+                            width: heightScreen * 0.23 * 0.85,
+                            padding: EdgeInsets.all(tDefaultSizeM),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(tUserProfileListened),
+                                    fit: BoxFit.fill)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(tListened,
+                                    style: tsProfilePageContainerText),
+                                Text(
+                                  minutes + tMinutes,
+                                  style: tsProfilePageContainerText,
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: heightScreen * 0.23,
+                            width: heightScreen * 0.23 * 0.85,
+                            padding: EdgeInsets.all(tDefaultSizeM),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(tUserProfileFinished),
+                                    fit: BoxFit.fill)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(tFinished,
+                                    style: tsProfilePageContainerText),
+                                Text(
+                                  sessions + tSessions,
+                                  style: tsProfilePageContainerText,
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    ),
-                    Container(
-                      height: heightScreen * 0.23,
-                      width: heightScreen * 0.23 * 0.85,
-                      padding: EdgeInsets.all(tDefaultSizeM),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(tUserProfileFinished),
-                              fit: BoxFit.fill)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SizedBox(
+                        height: tDefaultSizeL,
+                      ),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tFinished, style: tsProfilePageContainerText),
-                          Text(
-                            sessions + tSessions,
-                            style: tsProfilePageContainerText,
+                          Text(tRequests, style: tsProfilePageSubTitle),
+                          SizedBox(
+                            height: tDefaultSizeM,
+                          ),
+                          StreamBuilder<List<AppointmentRequest>>(
+                            stream: DBService.instance.getRequests(),
+                            builder: (context, snapshot) {
+                              var data = snapshot.data;
+                              return (data != null)
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: data.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              height: 90,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        tDefaultSizeS),
+                                                border: Border.all(
+                                                  color: cIconColor,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            data[index].toName,
+                                                            style:
+                                                                tsRequestTitle,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                          Container(
+                                                              width:
+                                                                  widthScreen *
+                                                                      0.55,
+                                                              child: Text(
+                                                                data[index].description,
+                                                                style:
+                                                                    tsRequestSubTitle,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 3,
+                                                              ))
+                                                        ],
+                                                      ),
+                                                      Text(data[index].status,
+                                                          style:
+                                                              tsRequestAccepted)
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: tDefaultSizeS,
+                                            ),
+                                          ],
+                                        );
+                                      })
+                                  : const SpinKitWanderingCubes(
+                                      color: Colors.white,
+                                      size: 50,
+                                    );
+                            },
                           )
                         ],
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: tDefaultSizeL,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(tRequests, style: tsProfilePageSubTitle),
-                    SizedBox(
-                      height: tDefaultSizeM,
-                    ),
-                    Requests(),
-                  ],
-                ),
-                SizedBox(
-                  height: tDefaultSizeM,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(tFavourites, style: tsProfilePageSubTitle),
-                    SizedBox(
-                      height: tDefaultSizeM,
-                    ),
-                    AudioItems(),
-                  ],
-                ),
-              ],
-            );
+                      SizedBox(
+                        height: tDefaultSizeM,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(tFavourites, style: tsProfilePageSubTitle),
+                          SizedBox(
+                            height: tDefaultSizeM,
+                          ),
+                          AudioItems(),
+                        ],
+                      ),
+                    ],
+                  );
           });
     });
   }

@@ -12,6 +12,7 @@ class UserData {
 
   factory UserData.fromFirestore(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
-    return UserData(id: snapshot.id, email: data["email"], name: data["name"], isPremium: false, role: data["role"]);
+    print(data);
+    return UserData(id: snapshot.id, email: data["email"], name: data["name"], isPremium: data["premium"], role: data["role"]);
   }
 }

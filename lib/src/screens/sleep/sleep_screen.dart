@@ -1,11 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
+import 'package:mental_health_app/src/providers/auth_provider.dart';
 import 'package:mental_health_app/src/screens/sleep/stories.dart';
+import 'package:mental_health_app/src/services/db_service.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/meditation.dart';
+import '../../models/user_data.dart';
 import '../components/audios.dart';
 
 class SleepScreen extends StatelessWidget {
@@ -13,69 +20,400 @@ class SleepScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var heightScreen = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: heightScreen * 0.33,
-            padding: EdgeInsets.only(right: tDefaultSizeM, left: tDefaultSizeM, bottom: tDefaultSizeL),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(tSleepZoneImage),
-                  fit: BoxFit.fill
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(tSleepZoneTitle, style: tsMeditationPageTitle,),
-                SizedBox(
-                  height: tDefaultSizeS,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image(image: AssetImage(tSleepZoneIcon),
-                    height: heightScreen * 0.17,),
-                    SizedBox(width: 10,),
-                    Text(tSleepZoneSubTitle, style: tsMeditationPageSubTitle)
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(right: tDefaultSizeM, left: tDefaultSizeM),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(height: heightScreen * 0.03,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(tBedTimeStories, style: tsAudioGroupTitle),
-                    SizedBox(height: heightScreen * 0.02,),
-                    Stories()
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: heightScreen * 0.03,),
-                    Text(tAudioListForSleep, style: tsAudioGroupTitle),
-                    SizedBox(height: heightScreen * 0.02,),
-                    AudioItems(),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+      child: ChangeNotifierProvider<AuthProvider>.value(
+        value: AuthProvider.instance,
+        child: sleepPageUI(heightScreen),
       ),
     );
   }
+
+  void showPremiumBanner() {}
+
+  Widget sleepPageUI(double heightScreen) {
+    return Builder(builder: (BuildContext context) {
+      var _auth = Provider.of<AuthProvider>(context);
+      return StreamBuilder<UserData>(
+        stream: DBService.instance.getUserData(_auth.user!.uid),
+        builder: (context, snapshot) {
+          var userData = snapshot.data;
+          return (userData == null)
+              ? SizedBox(
+                  height: heightScreen / 2,
+                  child: SpinKitWanderingCubes(
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                )
+              : Column(
+                  children: [
+                    Container(
+                      height: heightScreen * 0.33,
+                      padding: EdgeInsets.only(
+                          right: tDefaultSizeM,
+                          left: tDefaultSizeM,
+                          bottom: tDefaultSizeL),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(tSleepZoneImage),
+                            fit: BoxFit.fill),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tSleepZoneTitle,
+                            style: tsMeditationPageTitle,
+                          ),
+                          SizedBox(
+                            height: tDefaultSizeS,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image(
+                                image: AssetImage(tSleepZoneIcon),
+                                height: heightScreen * 0.17,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(tSleepZoneSubTitle,
+                                  style: tsMeditationPageSubTitle)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                          right: tDefaultSizeM, left: tDefaultSizeM),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            height: heightScreen * 0.03,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(tBedTimeStories, style: tsAudioGroupTitle),
+                              SizedBox(
+                                height: heightScreen * 0.02,
+                              ),
+                              StreamBuilder<List<Meditation>>(
+                                stream: DBService.instance
+                                    .getAudios(Category.story),
+                                builder: (context, snapshot) {
+                                  var data = snapshot.data;
+                                  return (data == null)
+                                      ? const SpinKitWanderingCubes(
+                                          color: Colors.white,
+                                          size: 50,
+                                        )
+                                      : SizedBox(
+                                          height: 150,
+                                          child: ListView.separated(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: data.length,
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                padding: EdgeInsets.all(
+                                                    tDefaultSizeS),
+                                                decoration: BoxDecoration(
+                                                    color: cItemColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                height: 150,
+                                                width: 150,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      data[index].title,
+                                                      style: tsStoryTitle,
+                                                    ),
+                                                    Text(
+                                                      "${(data[index].duration / 60).round().toString()} минут",
+                                                      style: tsStorySubTitle,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              tStoryImage),
+                                                          height: 90,
+                                                          alignment:
+                                                              Alignment.center,
+                                                        )
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            separatorBuilder:
+                                                (context, index) => SizedBox(
+                                              width: tDefaultSizeS,
+                                            ),
+                                          ));
+                                },
+                              )
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: heightScreen * 0.03,
+                              ),
+                              Text(tAudioListForSleep,
+                                  style: tsAudioGroupTitle),
+                              SizedBox(
+                                height: heightScreen * 0.02,
+                              ),
+                              StreamBuilder<List<Meditation>>(
+                                stream: DBService.instance
+                                    .getAudios(Category.sleep),
+                                builder: (context, snapshot) {
+                                  var data = snapshot.data;
+                                  return (data != null)
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: data.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              children: [
+                                                Container(
+                                                    height: 60,
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                        color: cItemColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                (!data[index]
+                                                                        .premium)
+                                                                    ? IconButton(
+                                                                        icon:
+                                                                            const Icon(
+                                                                          Icons
+                                                                              .play_circle,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        color:
+                                                                            cIconColor,
+                                                                      )
+                                                                    : (userData
+                                                                            .isPremium)
+                                                                        ? IconButton(
+                                                                            icon:
+                                                                                const Icon(
+                                                                              Icons.play_circle,
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {},
+                                                                            color:
+                                                                                cIconColor,
+                                                                          )
+                                                                        : IconButton(
+                                                                            icon:
+                                                                                const Icon(
+                                                                              Icons.lock,
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {
+
+                                                                                  showDialog(
+                                                                                      context:
+                                                                                      context,
+                                                                                      builder: (context) => AlertDialog(
+                                                                                          backgroundColor: cItemColor,
+                                                                                          contentPadding: EdgeInsets.zero,
+                                                                                          content: Container(
+                                                                                            padding:
+                                                                                            EdgeInsets.all(tDefaultSizeML),
+                                                                                            decoration: BoxDecoration(
+                                                                                                borderRadius: BorderRadius.circular(tDefaultSizeS),
+                                                                                                color: cItemColor),
+                                                                                            child:
+                                                                                            Column(
+                                                                                              mainAxisSize:
+                                                                                              MainAxisSize.max,
+                                                                                              mainAxisAlignment:
+                                                                                              MainAxisAlignment.spaceBetween,
+                                                                                              crossAxisAlignment:
+                                                                                              CrossAxisAlignment.center,
+                                                                                              children: [
+                                                                                                Row(
+                                                                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                  children: [
+                                                                                                    IconButton(
+                                                                                                      icon: Icon(Icons.close_rounded,
+                                                                                                      color: cSubTextColor,), onPressed: () {
+                                                                                                      Navigator.of(context).pop();
+                                                                                                    },
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Image(image: AssetImage(tPremiumImg)),
+                                                                                                Column(
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      tPremiumTitle2,
+                                                                                                      style: tsPremiumTitle,
+                                                                                                      textAlign: TextAlign.center,
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                      height: tDefaultSizeS,
+                                                                                                    ),
+                                                                                                    Text(
+                                                                                                      tPremiumSubTitle2,
+                                                                                                      style: tsPremiumSubTitle,
+                                                                                                      textAlign: TextAlign.center,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Column(
+                                                                                                  children: [
+                                                                                                    Container(
+                                                                                                        child: Text(
+                                                                                                          "Всего за 1390тг",
+                                                                                                          style: tsCostWhite,
+                                                                                                        )),
+                                                                                                    Container(
+                                                                                                        transform: Matrix4.translationValues(0.0, -43.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          "Всего за 1390тг",
+                                                                                                          style: tsCost,
+                                                                                                        )),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                ElevatedButton(
+                                                                                                    style: ButtonStyle(
+                                                                                                      minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                                                                                                      backgroundColor: MaterialStateProperty.all(cAppRequestPageTitle),
+                                                                                                      shape: MaterialStateProperty.all(
+                                                                                                        RoundedRectangleBorder(
+                                                                                                          borderRadius: BorderRadius.circular(10),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    onPressed: () {},
+                                                                                                    child: Text(
+                                                                                                      tPremiumButton,
+                                                                                                      style: tsButton,
+                                                                                                    )),
+                                                                                                SizedBox(
+                                                                                                  height: tDefaultSizeS,
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          )));
+
+
+                                                                                },
+                                                                            color:
+                                                                                cIconColor,
+                                                                          ),
+                                                                SizedBox(
+                                                                  width:
+                                                                      tDefaultSizeS,
+                                                                ),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                        data[index]
+                                                                            .title,
+                                                                        style:
+                                                                            tsAudioTitle),
+                                                                    SizedBox(
+                                                                      height: 3,
+                                                                    ),
+                                                                    Text(
+                                                                        "${(data[index].duration / 60).round()}:${data[index].duration % 60}",
+                                                                        style:
+                                                                            tsAudioSubTitle)
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            (!data[index]
+                                                                    .premium)
+                                                                ? IconButton(
+                                                                    icon: const Icon(
+                                                                        Icons
+                                                                            .favorite_border),
+                                                                    onPressed:
+                                                                        () {},
+                                                                    color:
+                                                                        cIconColor,
+                                                                  )
+                                                                : (userData
+                                                                        .isPremium)
+                                                                    ? IconButton(
+                                                                        icon: const Icon(
+                                                                            Icons.favorite_border),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        color:
+                                                                            cIconColor,
+                                                                      )
+                                                                    : const SizedBox()
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: tDefaultSizeS,
+                                                )
+                                              ],
+                                            );
+                                          })
+                                      : const SpinKitWanderingCubes(
+                                          color: Colors.white,
+                                          size: 50,
+                                        );
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                );
+        },
+      );
+    });
+  }
 }
+

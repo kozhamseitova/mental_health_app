@@ -6,14 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
+import 'package:mental_health_app/src/models/user_data.dart';
 import 'package:mental_health_app/src/screens/home/recommendations.dart';
 
 import '../../constants/image_strings.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+
   static const String name = "Маха";
   static const String minutesOfMeditation = "5";
+
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
