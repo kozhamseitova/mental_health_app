@@ -64,8 +64,8 @@ class UserProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(icon: Icon(Icons.exit_to_app, color: cSubTextColor,), onPressed: () {
-                            // _auth.logoutUser();
-                           },),
+                            _auth.logoutUser();
+                          },),
                         ],
                       ),
                       Column(
@@ -198,7 +198,7 @@ class UserProfileScreen extends StatelessWidget {
                                                       ),
                                                       Text(data[index].status,
                                                           style:
-                                                              tsRequestAccepted)
+                                                          (data[index].status == "принято") ? tsRequestAccepted : (data[index].status == "отказано" ) ? tsRequestRejected : tsRequestSended)
                                                     ],
                                                   ),
                                                 ],

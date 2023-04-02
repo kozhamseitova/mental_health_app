@@ -94,7 +94,7 @@ class MeditationScreen extends StatelessWidget {
                       SizedBox(
                         height: heightScreen * 0.03,
                       ),
-                      StreamBuilder<Meditation>(
+                      (userData.lastAudio == "") ? SizedBox() : StreamBuilder<Meditation>(
                         stream: DBService.instance.getAudio(userData.lastAudio),
                         builder: (context, snapshot) {
                           var aud = snapshot.data;

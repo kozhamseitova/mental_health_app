@@ -53,6 +53,14 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       height: tDefaultSizeL,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(icon: Icon(Icons.exit_to_app, color: cSubTextColor,), onPressed: () {
+                          _auth.logoutUser();
+                        },),
+                      ],
+                    ),
+                    Row(
                       children: [
                         Text(tHelloDoctor + userData.name + "!",
                             style: tsProfilePageTitle)

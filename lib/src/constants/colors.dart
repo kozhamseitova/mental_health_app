@@ -10,6 +10,9 @@ const Color cItemColor = Color.fromARGB(0xff, 0x6, 0x10, 0x29);
 const Color cIconColor = Color.fromARGB(0xff, 0xcc, 0xd2, 0xE3);
 const Color cSelectedIconColor = Color.fromARGB(0xff, 0x5d, 0x6c, 0x94);
 const Color cAcceptedRequest = Color.fromARGB(0xff, 58, 245, 28);
+const Color cRejectedRequest = Color.fromARGB(0xff, 163, 48, 34);
+const Color cSentRequest = Color.fromARGB(0xff, 0xFF, 0xff, 0xFF);
+
 const Color cAppRequestPageTitle = Color.fromARGB(0xff, 250, 187, 6);
 
 

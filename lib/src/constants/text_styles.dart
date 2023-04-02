@@ -42,6 +42,10 @@ const TextStyle tsProfilePageContainerText = TextStyle(color: cTextColor, fontSi
 const TextStyle tsRequestTitle = TextStyle(color: cTextColor, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 const TextStyle tsRequestSubTitle = TextStyle(color: cTextColor, fontSize: 13, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 const TextStyle tsRequestAccepted = TextStyle(color: cAcceptedRequest, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsRequestSended = TextStyle(color: cSentRequest, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsRequestRejected = TextStyle(color: cRejectedRequest, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+
+
 const TextStyle tsRequestGroupTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 
 const TextStyle tsAppRequestPageTitle = TextStyle(color: cAppRequestPageTitle, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Rubik');

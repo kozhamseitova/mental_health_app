@@ -164,6 +164,8 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                                               _controllerDesc.text,
                                                                           );
 
+                                                                          Navigator.of(context).pop();
+
 
                                                                         },
                                                                         child: Text(tApply, style: tsApply,),
