@@ -123,7 +123,15 @@ class _PlayerState extends State<Player> {
                         setAudio(data.link);
                         return Column(
                           children: [
-                            SizedBox(height: 100,),
+                            SizedBox(height: 50,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(onPressed: (){Navigator. of(context). pop();}, icon: Icon(Icons.close_rounded))
+                              ],
+                            ),
+
+                            SizedBox(height: 50,),
                             Container(
                               width: 250,
                               height: 250,
