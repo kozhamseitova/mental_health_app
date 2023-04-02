@@ -7,10 +7,13 @@ import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
 import 'package:mental_health_app/src/features/auth.dart';
+import 'package:mental_health_app/src/models/favorite.dart';
 import 'package:mental_health_app/src/screens/profile/requests.dart';
 import 'package:mental_health_app/src/services/db_service.dart';
+import 'package:mental_health_app/src/services/navigation_service.dart';
 
 import '../../constants/text_strings.dart';
+import '../../models/meditation.dart';
 import '../../models/request.dart';
 import '../../models/user_data.dart';
 import '../components/audios.dart';
@@ -36,6 +39,7 @@ class UserProfileScreen extends StatelessWidget {
             child: _profilePageUI(heightScreen, widthScreen)));
   }
 
+
   Widget _profilePageUI(double heightScreen, double widthScreen) {
     return Builder(builder: (BuildContext context) {
       _auth = Provider.of<AuthProvider>(context);
@@ -59,7 +63,9 @@ class UserProfileScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.exit_to_app, color: cSubTextColor,),
+                          IconButton(icon: Icon(Icons.exit_to_app, color: cSubTextColor,), onPressed: () {
+                            // _auth.logoutUser();
+                           },),
                         ],
                       ),
                       Column(
@@ -93,7 +99,7 @@ class UserProfileScreen extends StatelessWidget {
                                 Text(tListened,
                                     style: tsProfilePageContainerText),
                                 Text(
-                                  minutes + tMinutes,
+                                  userData.minutes.toString() + tMinutes,
                                   style: tsProfilePageContainerText,
                                 )
                               ],
@@ -114,7 +120,7 @@ class UserProfileScreen extends StatelessWidget {
                                 Text(tFinished,
                                     style: tsProfilePageContainerText),
                                 Text(
-                                  sessions + tSessions,
+                                  userData.sessions.toString() + tSessions,
                                   style: tsProfilePageContainerText,
                                 )
                               ],
@@ -133,7 +139,7 @@ class UserProfileScreen extends StatelessWidget {
                             height: tDefaultSizeM,
                           ),
                           StreamBuilder<List<AppointmentRequest>>(
-                            stream: DBService.instance.getRequests(),
+                            stream: DBService.instance.getRequests(userData.id, userData.role, ""),
                             builder: (context, snapshot) {
                               var data = snapshot.data;
                               return (data != null)
@@ -222,7 +228,73 @@ class UserProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: tDefaultSizeM,
                           ),
-                          AudioItems(),
+                          StreamBuilder<List<Favorite>>(
+                                stream: DBService.instance.getFavourites(_auth.user!.uid),
+                                builder: (context, snapshot) {
+                                      var data = snapshot.data;
+                                      return (data == null) ? const SpinKitWanderingCubes(
+                                            color: Colors.white,
+                                            size: 50,
+                                      ) : ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: data.length,
+                                          itemBuilder: (context, index) {
+                                                return Column(
+                                                      children: [
+                                                            Container(
+                                                                height: 60,
+                                                                padding: EdgeInsets.all(5),
+                                                                decoration: BoxDecoration(
+                                                                    color: cItemColor,
+                                                                    borderRadius: BorderRadius.circular(10)
+                                                                ),
+                                                                child: Column(
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      children: [
+                                                                            Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: [
+                                                                                        Row(
+                                                                                              children: [
+                                                                                                    IconButton(
+                                                                                                          icon: const Icon(Icons.play_circle,),
+                                                                                                          onPressed: () {  },
+                                                                                                          color: cIconColor,
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                          width: tDefaultSizeS,
+                                                                                                    ),
+                                                                                                    Column(
+                                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                          children: [
+                                                                                                                Text(data[index].title, style: tsAudioTitle),
+                                                                                                                SizedBox(height: 3,),
+                                                                                                                Text("${(data[index].duration/60).round()}:${data[index].duration%60}", style: tsAudioSubTitle )
+                                                                                                          ],
+                                                                                                    ),
+                                                                                              ],
+                                                                                        ),
+                                                                                        IconButton(
+                                                                                              icon: const Icon(Icons.favorite),
+                                                                                              onPressed: () {
+
+                                                                                                  DBService.instance.removeFavourite(_auth.user!.uid, data[index].id);
+
+                                                                                              },
+                                                                                              color: cIconColor,
+                                                                                        ),
+                                                                                  ],
+                                                                            ),
+                                                                      ],
+                                                                )
+                                                            ),
+                                                            SizedBox(height: tDefaultSizeS,)
+                                                      ],
+                                                );
+                                          }
+                                      );
+                                },
+                          )
                         ],
                       ),
                     ],

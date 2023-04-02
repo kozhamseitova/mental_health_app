@@ -48,6 +48,7 @@ dependencies:
   cloud_firestore: ^4.4.5
   provider: ^6.0.5
   flutter_spinkit: ^5.1.0
+  audioplayers: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/audios/
     - assets/images/welcome_page/
     - assets/images/login_page/
     - assets/images/forgot_password_page/
@@ -74,6 +76,7 @@ flutter:
     - assets/images/doctor_profile_page/
     - assets/images/appointment_request_page/
     - assets/images/premium/
+    - assets/images/med.jpg
 
   fonts:
     - family: Lobster

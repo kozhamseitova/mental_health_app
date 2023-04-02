@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/features/auth.dart';
 import 'package:mental_health_app/src/providers/auth_provider.dart';
+import 'package:mental_health_app/src/screens/profile/doctor_profile_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/user_data.dart';
@@ -44,7 +45,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     HomeScreen(),
     MeditationScreen(),
     SleepScreen(),
-    UserProfileScreen(),
+    DoctorProfileScreen(),
   ];
 
   void onSelectTab(int index) {

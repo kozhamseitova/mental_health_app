@@ -55,4 +55,16 @@ class AuthProvider extends ChangeNotifier {
       user = null;
     }
   }
+
+  // void logoutUser() async {
+  //   try {
+  //     await _auth.signOut();
+  //     user = null;
+  //     status = AuthStatus.NotAuthenticated;
+  //     await NavigationService.instance.navigateToReplacement("login");
+  //   } catch(e) {
+  //     print(e);
+  //   }
+  //   notifyListeners();
+  // }
 }

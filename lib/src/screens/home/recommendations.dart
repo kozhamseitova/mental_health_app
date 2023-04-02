@@ -11,7 +11,7 @@ class Recommendations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 130,
       child: ListView.separated(
           shrinkWrap: true,

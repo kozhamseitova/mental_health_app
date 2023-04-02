@@ -6,6 +6,7 @@ import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/sizes.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/constants/text_styles.dart';
+import 'package:mental_health_app/src/models/favorite.dart';
 import 'package:mental_health_app/src/providers/auth_provider.dart';
 import 'package:mental_health_app/src/screens/sleep/stories.dart';
 import 'package:mental_health_app/src/services/db_service.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 import '../../models/meditation.dart';
 import '../../models/user_data.dart';
 import '../components/audios.dart';
+import '../player/player.dart';
 
 class SleepScreen extends StatelessWidget {
   const SleepScreen({Key? key}) : super(key: key);
@@ -21,18 +23,19 @@ class SleepScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var heightScreen = MediaQuery.of(context).size.height;
+    var widthScreen = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
       child: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
-        child: sleepPageUI(heightScreen),
+        child: sleepPageUI(heightScreen, widthScreen),
       ),
     );
   }
 
   void showPremiumBanner() {}
 
-  Widget sleepPageUI(double heightScreen) {
+  Widget sleepPageUI(double heightScreen, double widthScreen) {
     return Builder(builder: (BuildContext context) {
       var _auth = Provider.of<AuthProvider>(context);
       return StreamBuilder<UserData>(
@@ -121,46 +124,67 @@ class SleepScreen extends StatelessWidget {
                                             scrollDirection: Axis.horizontal,
                                             itemCount: data.length,
                                             itemBuilder: (context, index) {
-                                              return Container(
-                                                padding: EdgeInsets.all(
-                                                    tDefaultSizeS),
-                                                decoration: BoxDecoration(
-                                                    color: cItemColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                height: 150,
-                                                width: 150,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      data[index].title,
-                                                      style: tsStoryTitle,
-                                                    ),
-                                                    Text(
-                                                      "${(data[index].duration / 60).round().toString()} минут",
-                                                      style: tsStorySubTitle,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image(
-                                                          image: AssetImage(
-                                                              tStoryImage),
-                                                          height: 90,
-                                                          alignment:
-                                                              Alignment.center,
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
+                                              return InkWell(
+                                                onTap: () {
+                                                  showGeneralDialog(
+                                                      context: context,
+                                                      barrierDismissible: true,
+                                                      barrierLabel:
+                                                      MaterialLocalizations.of(context)
+                                                          .modalBarrierDismissLabel,
+                                                      barrierColor: Colors.black45,
+                                                      pageBuilder: (BuildContext ctx,
+                                                          Animation animation,
+                                                          Animation secondaryAnimation) {
+                                                        return Container(
+                                                            width: widthScreen,
+                                                            height: heightScreen,
+                                                            color: cBackgroundColor,
+                                                            child: Player(audioId: data[index].id, user: userData,)
+                                                        );
+                                                      });
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.all(
+                                                      tDefaultSizeS),
+                                                  decoration: BoxDecoration(
+                                                      color: cItemColor,
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                                  height: 150,
+                                                  width: 150,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        data[index].title,
+                                                        style: tsStoryTitle,
+                                                      ),
+                                                      Text(
+                                                        "${(data[index].duration / 60).round().toString()} минут",
+                                                        style: tsStorySubTitle,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                tStoryImage),
+                                                            height: 90,
+                                                            alignment:
+                                                            Alignment.center,
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -184,100 +208,130 @@ class SleepScreen extends StatelessWidget {
                               SizedBox(
                                 height: heightScreen * 0.02,
                               ),
-                              StreamBuilder<List<Meditation>>(
+                              StreamBuilder<List<Favorite>>(
                                 stream: DBService.instance
-                                    .getAudios(Category.sleep),
-                                builder: (context, snapshot) {
-                                  var data = snapshot.data;
-                                  return (data != null)
-                                      ? ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: data.length,
-                                          itemBuilder: (context, index) {
-                                            return Column(
-                                              children: [
-                                                Container(
-                                                    height: 60,
-                                                    padding: EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(
-                                                        color: cItemColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Row(
+                                    .getFavourites(userData.id),
+                                builder: (context1, snapshot1) {
+                                  var data1 = snapshot1.data;
+                                  return StreamBuilder<List<Meditation>>(
+                                    stream: DBService.instance
+                                        .getAudios(Category.sleep),
+                                    builder: (context, snapshot) {
+                                      var data = snapshot.data;
+                                      return (data != null && data1 != null)
+                                          ? ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: data.length,
+                                              itemBuilder: (context, index) {
+                                                return Column(
+                                                  children: [
+                                                    Container(
+                                                        height: 60,
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        decoration: BoxDecoration(
+                                                            color: cItemColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .spaceBetween,
+                                                                  .center,
                                                           children: [
                                                             Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
                                                               children: [
-                                                                (!data[index]
-                                                                        .premium)
-                                                                    ? IconButton(
-                                                                        icon:
-                                                                            const Icon(
-                                                                          Icons
-                                                                              .play_circle,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () {},
-                                                                        color:
-                                                                            cIconColor,
-                                                                      )
-                                                                    : (userData
-                                                                            .isPremium)
+                                                                Row(
+                                                                  children: [
+                                                                    (!data[index]
+                                                                            .premium)
                                                                         ? IconButton(
                                                                             icon:
                                                                                 const Icon(
                                                                               Icons.play_circle,
                                                                             ),
                                                                             onPressed:
-                                                                                () {},
+                                                                                () {
+                                                                                  showGeneralDialog(
+                                                                                      context: context,
+                                                                                      barrierDismissible: true,
+                                                                                      barrierLabel:
+                                                                                      MaterialLocalizations.of(context)
+                                                                                          .modalBarrierDismissLabel,
+                                                                                      barrierColor: Colors.black45,
+                                                                                      pageBuilder: (BuildContext ctx,
+                                                                                          Animation animation,
+                                                                                          Animation secondaryAnimation) {
+                                                                                        return Container(
+                                                                                            width: widthScreen,
+                                                                                            height: heightScreen,
+                                                                                            color: cBackgroundColor,
+                                                                                            child: Player(audioId: data[index].id, user: userData,)
+                                                                                        );
+                                                                                      });
+                                                                                },
                                                                             color:
                                                                                 cIconColor,
                                                                           )
-                                                                        : IconButton(
-                                                                            icon:
-                                                                                const Icon(
-                                                                              Icons.lock,
-                                                                            ),
-                                                                            onPressed:
-                                                                                () {
-
+                                                                        : (userData.isPremium)
+                                                                            ? IconButton(
+                                                                                icon: const Icon(
+                                                                                  Icons.play_circle,
+                                                                                ),
+                                                                                onPressed: () {
+                                                                                  showGeneralDialog(
+                                                                                      context: context,
+                                                                                      barrierDismissible: true,
+                                                                                      barrierLabel:
+                                                                                      MaterialLocalizations.of(context)
+                                                                                          .modalBarrierDismissLabel,
+                                                                                      barrierColor: Colors.black45,
+                                                                                      pageBuilder: (BuildContext ctx,
+                                                                                          Animation animation,
+                                                                                          Animation secondaryAnimation) {
+                                                                                        return Container(
+                                                                                            width: widthScreen,
+                                                                                            height: heightScreen,
+                                                                                            color: cBackgroundColor,
+                                                                                            child: Player(audioId: data[index].id, user: userData,)
+                                                                                        );
+                                                                                      });
+                                                                                },
+                                                                                color: cIconColor,
+                                                                              )
+                                                                            : IconButton(
+                                                                                icon: const Icon(
+                                                                                  Icons.lock,
+                                                                                ),
+                                                                                onPressed: () {
                                                                                   showDialog(
-                                                                                      context:
-                                                                                      context,
+                                                                                      context: context,
                                                                                       builder: (context) => AlertDialog(
                                                                                           backgroundColor: cItemColor,
                                                                                           contentPadding: EdgeInsets.zero,
                                                                                           content: Container(
-                                                                                            padding:
-                                                                                            EdgeInsets.all(tDefaultSizeML),
-                                                                                            decoration: BoxDecoration(
-                                                                                                borderRadius: BorderRadius.circular(tDefaultSizeS),
-                                                                                                color: cItemColor),
-                                                                                            child:
-                                                                                            Column(
-                                                                                              mainAxisSize:
-                                                                                              MainAxisSize.max,
-                                                                                              mainAxisAlignment:
-                                                                                              MainAxisAlignment.spaceBetween,
-                                                                                              crossAxisAlignment:
-                                                                                              CrossAxisAlignment.center,
+                                                                                            padding: EdgeInsets.all(tDefaultSizeML),
+                                                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(tDefaultSizeS), color: cItemColor),
+                                                                                            child: Column(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
                                                                                               children: [
                                                                                                 Row(
                                                                                                   mainAxisAlignment: MainAxisAlignment.end,
                                                                                                   children: [
                                                                                                     IconButton(
-                                                                                                      icon: Icon(Icons.close_rounded,
-                                                                                                      color: cSubTextColor,), onPressed: () {
-                                                                                                      Navigator.of(context).pop();
-                                                                                                    },
+                                                                                                      icon: Icon(
+                                                                                                        Icons.close_rounded,
+                                                                                                        color: cSubTextColor,
+                                                                                                      ),
+                                                                                                      onPressed: () {
+                                                                                                        Navigator.of(context).pop();
+                                                                                                      },
                                                                                                     ),
                                                                                                   ],
                                                                                                 ),
@@ -303,9 +357,9 @@ class SleepScreen extends StatelessWidget {
                                                                                                   children: [
                                                                                                     Container(
                                                                                                         child: Text(
-                                                                                                          "Всего за 1390тг",
-                                                                                                          style: tsCostWhite,
-                                                                                                        )),
+                                                                                                      "Всего за 1390тг",
+                                                                                                      style: tsCostWhite,
+                                                                                                    )),
                                                                                                     Container(
                                                                                                         transform: Matrix4.translationValues(0.0, -43.0, 0.0),
                                                                                                         child: Text(
@@ -335,75 +389,101 @@ class SleepScreen extends StatelessWidget {
                                                                                               ],
                                                                                             ),
                                                                                           )));
+                                                                                },
+                                                                                color: cIconColor,
+                                                                              ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          tDefaultSizeS,
+                                                                    ),
+                                                                    Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                            data[index]
+                                                                                .title,
+                                                                            style:
+                                                                                tsAudioTitle),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              3,
+                                                                        ),
+                                                                        Text(
+                                                                            "${(data[index].duration / 60).round()}:${data[index].duration % 60}",
+                                                                            style:
+                                                                                tsAudioSubTitle)
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                (!data[index]
+                                                                        .premium)
+                                                                    ? (data1
+                                                                            .where((element) =>
+                                                                                element.a_id ==
+                                                                                data[index].id)
+                                                                            .isEmpty)
+                                                                        ? IconButton(
+                                                                            icon:
+                                                                                const Icon(Icons.favorite_border),
+                                                                            onPressed:
+                                                                                () {
+                                                                              DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
+                                                                            },
+                                                                            color:
+                                                                                cIconColor,
+                                                                          )
+                                                                        : IconButton(
+                                                                            icon:
+                                                                                const Icon(Icons.favorite),
+                                                                            onPressed:
+                                                                                () {
 
+                                                                                  DBService.instance.removeFavouriteByAudioId(userData.id, data[index].id);
 
                                                                                 },
                                                                             color:
                                                                                 cIconColor,
-                                                                          ),
-                                                                SizedBox(
-                                                                  width:
-                                                                      tDefaultSizeS,
-                                                                ),
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                        data[index]
-                                                                            .title,
-                                                                        style:
-                                                                            tsAudioTitle),
-                                                                    SizedBox(
-                                                                      height: 3,
-                                                                    ),
-                                                                    Text(
-                                                                        "${(data[index].duration / 60).round()}:${data[index].duration % 60}",
-                                                                        style:
-                                                                            tsAudioSubTitle)
-                                                                  ],
-                                                                ),
+                                                                          )
+                                                                    : (userData.isPremium)
+                                                                        ? (data1.where((element) => element.a_id == data[index].id).isEmpty)
+                                                                            ? IconButton(
+                                                                                icon: const Icon(Icons.favorite_border),
+                                                                                onPressed: () {
+                                                                                  DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
+                                                                                },
+                                                                                color: cIconColor,
+                                                                              )
+                                                                            : IconButton(
+                                                                                icon: const Icon(Icons.favorite),
+                                                                                onPressed: () {
+
+                                                                                  DBService.instance.removeFavouriteByAudioId(userData.id, data[index].id);
+
+                                                                                },
+                                                                                color: cIconColor,
+                                                                              )
+                                                                        : const SizedBox()
                                                               ],
                                                             ),
-                                                            (!data[index]
-                                                                    .premium)
-                                                                ? IconButton(
-                                                                    icon: const Icon(
-                                                                        Icons
-                                                                            .favorite_border),
-                                                                    onPressed:
-                                                                        () {},
-                                                                    color:
-                                                                        cIconColor,
-                                                                  )
-                                                                : (userData
-                                                                        .isPremium)
-                                                                    ? IconButton(
-                                                                        icon: const Icon(
-                                                                            Icons.favorite_border),
-                                                                        onPressed:
-                                                                            () {},
-                                                                        color:
-                                                                            cIconColor,
-                                                                      )
-                                                                    : const SizedBox()
                                                           ],
-                                                        ),
-                                                      ],
-                                                    )),
-                                                SizedBox(
-                                                  height: tDefaultSizeS,
-                                                )
-                                              ],
+                                                        )),
+                                                    SizedBox(
+                                                      height: tDefaultSizeS,
+                                                    )
+                                                  ],
+                                                );
+                                              })
+                                          : const SpinKitWanderingCubes(
+                                              color: Colors.white,
+                                              size: 50,
                                             );
-                                          })
-                                      : const SpinKitWanderingCubes(
-                                          color: Colors.white,
-                                          size: 50,
-                                        );
+                                    },
+                                  );
                                 },
-                              )
+                              ),
                             ],
                           ),
                         ],
@@ -416,4 +496,3 @@ class SleepScreen extends StatelessWidget {
     });
   }
 }
-
