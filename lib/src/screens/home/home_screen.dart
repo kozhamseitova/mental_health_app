@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                                       width: widthScreen,
                                       height: heightScreen,
                                       color: cBackgroundColor,
-                                      child: Player(user: data, audioId: "",)
+                                      child: Player(user: data, audioId: "zgZPM093EXyYmTVSGpSM",)
                                     );
                                   });
                             },
@@ -273,44 +273,64 @@ class HomeScreen extends StatelessWidget {
                           stream:
                               DBService.instance.getAudios(Category.meditation),
                           builder: (context, snapshot) {
-                            var data = snapshot.data;
-                            return (data != null)
+                            var d = snapshot.data;
+                            return (d != null)
                                 ? ListView.separated(
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemCount:
-                                        (data.length > 3) ? 4 : data.length,
+                                        (d.length > 3) ? 4 : d.length,
                                     itemBuilder: (context, index) {
-                                      final item = data[index];
-                                      return Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: tDefaultSizeS),
-                                        height: 130,
-                                        width: 130,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: AssetImage(tHomePageRec),
-                                                fit: BoxFit.cover),
-                                            borderRadius: BorderRadius.circular(
-                                                tDefaultSizeS)),
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Container(
-                                              height: 12,
-                                              width: 114,
-                                              decoration: BoxDecoration(
-                                                color: cTextColor,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                        tDefaultSizeS)),
-                                              ),
-                                              child: Text(
-                                                item.title,
-                                                style: tsHomePageItemSubTitle,
-                                                textAlign: TextAlign.center,
-                                              )),
-                                        ),
-                                      );
+                                      final item = d[index];
+                                      return
+                                        InkWell(
+                                          onTap: () {
+                                        showGeneralDialog(
+                                            context: context,
+                                            barrierDismissible: true,
+                                            barrierLabel:
+                                            MaterialLocalizations.of(context)
+                                                .modalBarrierDismissLabel,
+                                            barrierColor: Colors.black45,
+                                            pageBuilder: (BuildContext ctx,
+                                                Animation animation,
+                                                Animation secondaryAnimation) {
+                                              return Container(
+                                                  width: widthScreen,
+                                                  height: heightScreen,
+                                                  color: cBackgroundColor,
+                                                  child: Player(user: data, audioId: d[index].id,)
+                                              );
+                                            });
+                                      }, child: Container(
+                                          padding: EdgeInsets.only(
+                                              bottom: tDefaultSizeS),
+                                          height: 130,
+                                          width: 130,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(tHomePageRec),
+                                                  fit: BoxFit.cover),
+                                              borderRadius: BorderRadius.circular(
+                                                  tDefaultSizeS)),
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                                height: 12,
+                                                width: 114,
+                                                decoration: BoxDecoration(
+                                                  color: cTextColor,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(
+                                                          tDefaultSizeS)),
+                                                ),
+                                                child: Text(
+                                                  item.title,
+                                                  style: tsHomePageItemSubTitle,
+                                                  textAlign: TextAlign.center,
+                                                )),
+                                          ),
+                                        ));
                                     },
                                     separatorBuilder: (context, index) =>
                                         SizedBox(

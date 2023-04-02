@@ -54,14 +54,6 @@ class _PlayerState extends State<Player> {
       });
     });
 
-    audioPlayer.onPlayerComplete.listen((event) {
-      int dur = duration.inMinutes;
-      print("HERE");
-      minutes = minutes + dur;
-      print(minutes + dur);
-      sessions = sessions + 1;
-      DBService.instance.updateUserData(widget.user.id, minutes, sessions, widget.audioId);
-    });
   }
 
   @override
@@ -100,7 +92,13 @@ class _PlayerState extends State<Player> {
               stream: DBService.instance.getUserData(_auth.user!.uid),
               builder: (context, snapshot) {
                 var d = snapshot.data;
-                DBService.instance.updateUserData(widget.user.id, widget.user.minutes, widget.user.sessions, widget.audioId);
+                  if (d != null) {
+                    audioPlayer.onPlayerComplete.listen((event) {
+                      int dur = duration.inMinutes;
+                      DBService.instance.updateUserData(
+                          widget.user.id, d.minutes + dur, d.sessions + 1, d.lastAudio);
+                    });
+                }
                 return Container(
                     decoration: BoxDecoration(
                       color: cBackgroundColor,

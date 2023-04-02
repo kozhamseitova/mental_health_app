@@ -20,6 +20,8 @@ import '../components/audios.dart';
 import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../player/player.dart';
+
 class UserProfileScreen extends StatelessWidget {
   static const String name = "Маха";
   static const String minutes = "0";
@@ -258,7 +260,25 @@ class UserProfileScreen extends StatelessWidget {
                                                                                               children: [
                                                                                                     IconButton(
                                                                                                           icon: const Icon(Icons.play_circle,),
-                                                                                                          onPressed: () {  },
+                                                                                                          onPressed: () {
+                                                                                                            showGeneralDialog(
+                                                                                                                context: context,
+                                                                                                                barrierDismissible: true,
+                                                                                                                barrierLabel:
+                                                                                                                MaterialLocalizations.of(context)
+                                                                                                                    .modalBarrierDismissLabel,
+                                                                                                                barrierColor: Colors.black45,
+                                                                                                                pageBuilder: (BuildContext ctx,
+                                                                                                                    Animation animation,
+                                                                                                                    Animation secondaryAnimation) {
+                                                                                                                  return Container(
+                                                                                                                      width: widthScreen,
+                                                                                                                      height: heightScreen,
+                                                                                                                      color: cBackgroundColor,
+                                                                                                                      child: Player(user: userData, audioId: data[index].a_id,)
+                                                                                                                  );
+                                                                                                                });
+                                                                                                          },
                                                                                                           color: cIconColor,
                                                                                                     ),
                                                                                                     SizedBox(
