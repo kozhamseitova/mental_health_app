@@ -223,7 +223,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: tsButton,
                               )),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             tHaveAccountQ,

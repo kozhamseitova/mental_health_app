@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       Text(tWelcomeTitle, style: tsWelcomePageTitle,),
                       SizedBox(height: 15),
-                      Text(tWelcomeSubTitle, style: tsWelcomePageSubTitle,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 15) , child: Text(tWelcomeSubTitle, style: tsWelcomePageSubTitle,),),
                     ],
                   ),
                   Column(

@@ -212,7 +212,7 @@ class MeditationScreen extends StatelessWidget {
                                                     Text(
                                                         aud
                                                             .title,
-                                                        style: tsAudioTitle),
+                                                        style: tsAudioTitle, overflow: TextOverflow.ellipsis,),
                                                     SizedBox(
                                                       height:
                                                       3,
@@ -370,10 +370,13 @@ class MeditationScreen extends StatelessWidget {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                                   children: [
-                                                                    Text(
-                                                                        data[index]
-                                                                            .title,
-                                                                        style: tsAudioTitle),
+                                                                    SizedBox(
+                                                                      width: 220,
+                                                                      child: Text(
+                                                                          data[index]
+                                                                              .title,
+                                                                          style: tsAudioTitle, overflow: TextOverflow.ellipsis,),
+                                                                    ),
                                                                     SizedBox(
                                                                       height:
                                                                       3,

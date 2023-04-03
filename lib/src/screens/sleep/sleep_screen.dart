@@ -75,14 +75,11 @@ class SleepScreen extends StatelessWidget {
                             height: tDefaultSizeS,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Image(
                                 image: AssetImage(tSleepZoneIcon),
-                                height: heightScreen * 0.17,
-                              ),
-                              SizedBox(
-                                width: 10,
+                                height: heightScreen * 0.15,
                               ),
                               Text(tSleepZoneSubTitle,
                                   style: tsMeditationPageSubTitle)
@@ -161,9 +158,13 @@ class SleepScreen extends StatelessWidget {
                                                     crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                     children: [
-                                                      Text(
-                                                        data[index].title,
-                                                        style: tsStoryTitle,
+                                                      SizedBox(
+                                                        width: 130,
+                                                        child: Text(
+                                                          data[index].title,
+                                                          style: tsStoryTitle,
+                                                          overflow: TextOverflow.ellipsis,
+                                                        ),
                                                       ),
                                                       Text(
                                                         "${(data[index].duration / 60).round().toString()} минут",
