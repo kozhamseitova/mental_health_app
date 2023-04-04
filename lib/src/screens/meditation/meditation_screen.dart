@@ -358,7 +358,93 @@ class MeditationScreen extends StatelessWidget {
                                                                   icon: const Icon(
                                                                     Icons.lock,
                                                                   ),
-                                                                  onPressed: () {},
+                                                                  onPressed: () {
+                                                                    showDialog(
+                                                                        context: context,
+                                                                        builder: (context) => AlertDialog(
+                                                                            backgroundColor: cItemColor,
+                                                                            contentPadding: EdgeInsets.zero,
+                                                                            content: Container(
+                                                                              padding: EdgeInsets.all(tDefaultSizeML),
+                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(tDefaultSizeS), color: cItemColor),
+                                                                              child: Column(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                                    children: [
+                                                                                      IconButton(
+                                                                                        icon: Icon(
+                                                                                          Icons.close_rounded,
+                                                                                          color: cSubTextColor,
+                                                                                        ),
+                                                                                        onPressed: () {
+                                                                                          Navigator.of(context).pop();
+                                                                                        },
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  Image(image: AssetImage(tPremiumImg)),
+                                                                                  Column(
+                                                                                    children: [
+                                                                                      Text(
+                                                                                        tPremiumTitle2,
+                                                                                        style: tsPremiumTitle,
+                                                                                        textAlign: TextAlign.center,
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        height: tDefaultSizeS,
+                                                                                      ),
+                                                                                      Text(
+                                                                                        tPremiumSubTitle2,
+                                                                                        style: tsPremiumSubTitle,
+                                                                                        textAlign: TextAlign.center,
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  Column(
+                                                                                    children: [
+                                                                                      Container(
+                                                                                          child: Text(
+                                                                                            "Всего за 1390тг",
+                                                                                            style: tsCostWhite,
+                                                                                          )),
+                                                                                      Container(
+                                                                                          transform: Matrix4.translationValues(0.0, -43.0, 0.0),
+                                                                                          child: Text(
+                                                                                            "Всего за 1390тг",
+                                                                                            style: tsCost,
+                                                                                          )),
+                                                                                    ],
+                                                                                  ),
+                                                                                  ElevatedButton(
+                                                                                      style: ButtonStyle(
+                                                                                        minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                                                                                        backgroundColor: MaterialStateProperty.all(cAppRequestPageTitle),
+                                                                                        shape: MaterialStateProperty.all(
+                                                                                          RoundedRectangleBorder(
+                                                                                            borderRadius: BorderRadius.circular(10),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                      onPressed: () {
+                                                                                        DBService.instance.setPremium(userData.id);
+                                                                                        Navigator.of(context).pop();
+                                                                                      },
+                                                                                      child: Text(
+                                                                                        tPremiumButton,
+                                                                                        style: tsButton,
+                                                                                      )),
+                                                                                  SizedBox(
+                                                                                    height: tDefaultSizeS,
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            )));
+
+                                                                  },
                                                                   color: cIconColor,
                                                                 ),
                                                                 SizedBox(

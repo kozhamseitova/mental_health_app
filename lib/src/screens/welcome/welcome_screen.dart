@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ), onPressed: (){ NavigationService.instance.navigateToRoute(MaterialPageRoute(builder: (context) => LoginScreen())); }, child: Text(tLogin, style: tsButton,)),
+                      ), onPressed: (){ NavigationService.instance.navigateToReplacement("login"); }, child: Text(tLogin, style: tsButton,)),
                       SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

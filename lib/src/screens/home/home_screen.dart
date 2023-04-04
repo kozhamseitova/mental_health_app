@@ -151,18 +151,72 @@ class HomeScreen extends StatelessWidget {
                               )),
                           Column(
                             children: [
-                              Container(
-                                width: 200,
-                                height: 149,
-                                padding: EdgeInsets.only(
-                                    left: tDefaultSizeS, top: tDefaultSizeS),
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(tHomePageAudio),
+                              (data.lastAudio == "") ? InkWell(
+                                onTap: () {
+                                  showGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      barrierLabel:
+                                      MaterialLocalizations.of(context)
+                                          .modalBarrierDismissLabel,
+                                      barrierColor: Colors.black45,
+                                      pageBuilder: (BuildContext ctx,
+                                          Animation animation,
+                                          Animation secondaryAnimation) {
+                                        return Container(
+                                            width: widthScreen,
+                                            height: heightScreen,
+                                            color: cBackgroundColor,
+                                            child: Player(user: data, audioId: "zgZPM093EXyYmTVSGpSM",)
+                                        );
+                                      });
+                                },
+                                child: Container(
+                                  width: 200,
+                                  height: 149,
+                                  padding: EdgeInsets.only(
+                                      left: tDefaultSizeS, top: tDefaultSizeS),
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(tHomePageAudio),
+                                    ),
                                   ),
+                                  child: Text("Начните медитировать",
+                                      style: tsHomePageItemTitle),
                                 ),
-                                child: Text(tPopularAudio,
-                                    style: tsHomePageItemTitle),
+                              ) : InkWell(
+                                onTap: () {
+                                  showGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      barrierLabel:
+                                      MaterialLocalizations.of(context)
+                                          .modalBarrierDismissLabel,
+                                      barrierColor: Colors.black45,
+                                      pageBuilder: (BuildContext ctx,
+                                          Animation animation,
+                                          Animation secondaryAnimation) {
+                                        return Container(
+                                            width: widthScreen,
+                                            height: heightScreen,
+                                            color: cBackgroundColor,
+                                            child: Player(user: data, audioId: data.lastAudio,)
+                                        );
+                                      });
+                                },
+                                child: Container(
+                                    width: 200,
+                                    height: 149,
+                                    padding: EdgeInsets.only(
+                                        left: tDefaultSizeS, top: tDefaultSizeS),
+                                    decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(tHomePageAudio),
+                                      ),
+                                    ),
+                                    child: Text("Часто прослушиваемое аудио",
+                                        style: tsHomePageItemTitle),
+                                  )
                               ),
                               Container(
                                 width: 200,
@@ -248,7 +302,7 @@ class HomeScreen extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.only(left: 17, top: 64),
                                   child: Text(
-                                    "4 минуты",
+                                    "5 минут",
                                     style: tsHomePageDailyMeditationSubTitle,
                                   ),
                                 )

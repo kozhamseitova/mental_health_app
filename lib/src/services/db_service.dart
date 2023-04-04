@@ -57,6 +57,12 @@ class DBService {
     });
   }
 
+  Future<void> setPremium(String uid) {
+    return _db.collection(_userCollection).doc(uid).update({
+      "premium": true
+    });
+  }
+
   Future<UserData> getUserDataOnce(String uid) {
     var ref = _db.collection(_userCollection).doc(uid);
     return ref.get().then((value)
