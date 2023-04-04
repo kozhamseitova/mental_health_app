@@ -379,7 +379,10 @@ class SleepScreen extends StatelessWidget {
                                                                                                         ),
                                                                                                       ),
                                                                                                     ),
-                                                                                                    onPressed: () {},
+                                                                                                    onPressed: () {
+                                                                                                      DBService.instance.setPremium(userData.id);
+                                                                                                      Navigator.of(context).pop();
+                                                                                                    },
                                                                                                     child: Text(
                                                                                                       tPremiumButton,
                                                                                                       style: tsButton,

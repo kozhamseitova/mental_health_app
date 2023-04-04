@@ -14,6 +14,7 @@ import 'package:mental_health_app/src/screens/sleep/sleep_screen.dart';
 import 'package:mental_health_app/src/screens/welcome/welcome_screen.dart';
 import 'package:mental_health_app/src/services/navigation_service.dart';
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

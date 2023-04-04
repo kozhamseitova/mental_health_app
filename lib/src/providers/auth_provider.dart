@@ -54,6 +54,7 @@ class AuthProvider extends ChangeNotifier {
       print(e);
       user = null;
     }
+    notifyListeners();
   }
 
  void logoutUser() async {

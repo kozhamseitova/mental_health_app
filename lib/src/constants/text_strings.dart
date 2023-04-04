@@ -26,7 +26,7 @@ const String tHaveAccount = "Уже есть аккаунт? ";
 const String tPsychologist = "Я психолог";
 
 //Home Page
-const String tHomePageTitle = "Доброе утро, ";
+const String tHomePageTitle = "Привет, ";
 const String tHomePageSubTitle = "Как ваше настроение?";
 const String tMeditationTimeTitle = " минут";
 const String tMeditationTimeSubTitle = "медитирования";

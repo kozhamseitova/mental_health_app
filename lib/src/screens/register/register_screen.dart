@@ -62,6 +62,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
+            backgroundColor: cItemColor,
+            icon: Icon(Icons.error_outline),
+            iconColor: Colors.red,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -72,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     Navigator.of(ctx).pop();
                   },
-                  child: Text("OK"))
+                  child: Text("OK", style: tsAudioSubTitle,))
             ],
           );
         });
@@ -235,6 +238,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             _auth.registerUserWithEmailAndPassword(email, password, (String uid) async {
                               await DBService.instance.createUserInDB(uid, name, email, isPsychologist);
                             });
+                            if (_auth.status == AuthStatus.Error) {
+                              _controllerEmail.text = "";
+                              showErrorMessage("Пользователь с такой почтой уже существует");
+                            }
                           },
                           child: Text(
                             tSignUp,
