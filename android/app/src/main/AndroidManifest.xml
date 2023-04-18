@@ -2,7 +2,7 @@
     package="com.example.mental_health_app">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="mental_health_app"
+        android:label="Relax"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

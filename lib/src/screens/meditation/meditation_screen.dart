@@ -415,12 +415,6 @@ class MeditationScreen extends StatelessWidget {
                                                                                             userData.lang == "rus" ? "Всего за 1390 теңге" : "Бар болғаны 1390 теңге",
                                                                                             style: tsCostWhite,
                                                                                           )),
-                                                                                      Container(
-                                                                                          transform: Matrix4.translationValues(0.0, -43.0, 0.0),
-                                                                                          child: Text(
-                                                                                            userData.lang == "rus" ? "Всего за 1390 теңге" : "Бар болғаны 1390 теңге",
-                                                                                            style: tsCost,
-                                                                                          )),
                                                                                     ],
                                                                                   ),
                                                                                   ElevatedButton(
@@ -461,7 +455,7 @@ class MeditationScreen extends StatelessWidget {
                                                                       .start,
                                                                   children: [
                                                                     SizedBox(
-                                                                      width: 220,
+                                                                      width: 210,
                                                                       child: Text(
                                                                           userData.lang == "rus" ? data[index].title : data[index].titleQaz,
                                                                           style: tsAudioTitle, overflow: TextOverflow.ellipsis,),
