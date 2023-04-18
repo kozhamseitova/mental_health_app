@@ -358,12 +358,6 @@ class SleepScreen extends StatelessWidget {
                                                                                                   children: [
                                                                                                     Container(
                                                                                                         child: Text(
-                                                                                                      "Всего за 1390тг",
-                                                                                                      style: tsCostWhite,
-                                                                                                    )),
-                                                                                                    Container(
-                                                                                                        transform: Matrix4.translationValues(0.0, -43.0, 0.0),
-                                                                                                        child: Text(
                                                                                                           "Всего за 1390тг",
                                                                                                           style: tsCost,
                                                                                                         )),

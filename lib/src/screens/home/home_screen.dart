@@ -125,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              width: 141,
+                              width: widthScreen*0.4,
                               height: 238,
                               padding: const EdgeInsets.only(
                                   left: tDefaultSizeS, top: tDefaultSizeS),
@@ -172,10 +172,10 @@ class HomeScreen extends StatelessWidget {
                                       });
                                 },
                                 child: Container(
-                                  width: 200,
-                                  height: 149,
+                                  width: widthScreen*0.45,
+                                  height: 145,
                                   padding: EdgeInsets.only(
-                                      left: tDefaultSizeS, top: tDefaultSizeS),
+                                      left: 5, top: tDefaultSizeM),
                                   decoration: const BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(tHomePageAudio),
@@ -205,8 +205,8 @@ class HomeScreen extends StatelessWidget {
                                       });
                                 },
                                 child: Container(
-                                    width: 200,
-                                    height: 149,
+                                    width: widthScreen*0.45,
+                                    height: 130,
                                     padding: EdgeInsets.only(
                                         left: tDefaultSizeS, top: tDefaultSizeS),
                                     decoration: const BoxDecoration(
@@ -219,8 +219,8 @@ class HomeScreen extends StatelessWidget {
                                   )
                               ),
                               Container(
-                                width: 200,
-                                height: 95,
+                                width: widthScreen*0.45,
+                                height: 90,
                                 padding: EdgeInsets.only(left: tDefaultSizeS),
                                 decoration: const BoxDecoration(
                                   image: DecorationImage(

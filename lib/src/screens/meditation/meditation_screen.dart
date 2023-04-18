@@ -409,12 +409,6 @@ class MeditationScreen extends StatelessWidget {
                                                                                       Container(
                                                                                           child: Text(
                                                                                             "Всего за 1390тг",
-                                                                                            style: tsCostWhite,
-                                                                                          )),
-                                                                                      Container(
-                                                                                          transform: Matrix4.translationValues(0.0, -43.0, 0.0),
-                                                                                          child: Text(
-                                                                                            "Всего за 1390тг",
                                                                                             style: tsCost,
                                                                                           )),
                                                                                     ],
@@ -457,7 +451,7 @@ class MeditationScreen extends StatelessWidget {
                                                                       .start,
                                                                   children: [
                                                                     SizedBox(
-                                                                      width: 220,
+                                                                      width: 210,
                                                                       child: Text(
                                                                           data[index]
                                                                               .title,
