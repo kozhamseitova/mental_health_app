@@ -40,9 +40,9 @@ class WelcomeScreen extends StatelessWidget {
                   SizedBox(height: heightScreen * 0.25,),
                   Column(
                     children: [
-                      Text(tWelcomeTitle, style: tsWelcomePageTitle,),
+                      Text(tWelcomeTitleQaz, style: tsWelcomePageTitle,),
                       SizedBox(height: 15),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 15) , child: Text(tWelcomeSubTitle, style: tsWelcomePageSubTitle,),),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 15) , child: Text(tWelcomeSubTitleQaz, style: tsWelcomePageSubTitle,),),
                     ],
                   ),
                   Column(
@@ -55,15 +55,15 @@ class WelcomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ), onPressed: (){ NavigationService.instance.navigateToReplacement("login"); }, child: Text(tLogin, style: tsButton,)),
+                      ), onPressed: (){ NavigationService.instance.navigateToReplacement("login"); }, child: Text(tLoginQaz, style: tsButton,)),
                       SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(tHaveAccountQ, style: tsHaveAccount,),
+                          Text(tHaveAccountQQaz, style: tsHaveAccount,),
                           TextButton(
                             onPressed: () { NavigationService.instance.navigateToRoute(MaterialPageRoute(builder: (context) => RegisterScreen()));},
-                            child: Text(tSignUp, style: tsSignInSmall,),
+                            child: Text(tSignUpQaz, style: tsSignInSmall,),
                           ),
                         ],
                       )

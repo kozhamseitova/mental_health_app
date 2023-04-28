@@ -68,7 +68,7 @@ class SleepScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            tSleepZoneTitle,
+                            userData.lang == "rus" ? tSleepZoneTitle : tSleepZoneTitleQaz,
                             style: tsMeditationPageTitle,
                           ),
                           SizedBox(
@@ -81,7 +81,8 @@ class SleepScreen extends StatelessWidget {
                                 image: AssetImage(tSleepZoneIcon),
                                 height: heightScreen * 0.15,
                               ),
-                              Text(tSleepZoneSubTitle,
+                              Text(
+                                  userData.lang == "rus" ? tSleepZoneSubTitle : tSleepZoneSubTitleQaz,
                                   style: tsMeditationPageSubTitle)
                             ],
                           )
@@ -100,7 +101,9 @@ class SleepScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(tBedTimeStories, style: tsAudioGroupTitle),
+                              Text(
+                                  userData.lang == "rus" ? tBedTimeStories : tBedTimeStoriesQaz,
+                                  style: tsAudioGroupTitle),
                               SizedBox(
                                 height: heightScreen * 0.02,
                               ),
@@ -127,18 +130,28 @@ class SleepScreen extends StatelessWidget {
                                                       context: context,
                                                       barrierDismissible: true,
                                                       barrierLabel:
-                                                      MaterialLocalizations.of(context)
-                                                          .modalBarrierDismissLabel,
-                                                      barrierColor: Colors.black45,
-                                                      pageBuilder: (BuildContext ctx,
+                                                          MaterialLocalizations
+                                                                  .of(context)
+                                                              .modalBarrierDismissLabel,
+                                                      barrierColor:
+                                                          Colors.black45,
+                                                      pageBuilder: (BuildContext
+                                                              ctx,
                                                           Animation animation,
-                                                          Animation secondaryAnimation) {
+                                                          Animation
+                                                              secondaryAnimation) {
                                                         return Container(
                                                             width: widthScreen,
-                                                            height: heightScreen,
-                                                            color: cBackgroundColor,
-                                                            child: Player(audioId: data[index].id, user: userData,)
-                                                        );
+                                                            height:
+                                                                heightScreen,
+                                                            color:
+                                                                cBackgroundColor,
+                                                            child: Player(
+                                                              audioId:
+                                                                  data[index]
+                                                                      .id,
+                                                              user: userData,
+                                                            ));
                                                       });
                                                 },
                                                 child: Container(
@@ -147,23 +160,25 @@ class SleepScreen extends StatelessWidget {
                                                   decoration: BoxDecoration(
                                                       color: cItemColor,
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
+                                                          BorderRadius.circular(
+                                                              10)),
                                                   height: 150,
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         width: 130,
                                                         child: Text(
-                                                          data[index].title,
+                                                          userData.lang == "rus" ? data[index].title : data[index].titleQaz,
                                                           style: tsStoryTitle,
-                                                          overflow: TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                       ),
                                                       Text(
@@ -172,15 +187,15 @@ class SleepScreen extends StatelessWidget {
                                                       ),
                                                       Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Image(
                                                             image: AssetImage(
                                                                 tStoryImage),
                                                             height: 90,
-                                                            alignment:
-                                                            Alignment.center,
+                                                            alignment: Alignment
+                                                                .center,
                                                           )
                                                         ],
                                                       )
@@ -204,7 +219,8 @@ class SleepScreen extends StatelessWidget {
                               SizedBox(
                                 height: heightScreen * 0.03,
                               ),
-                              Text(tAudioListForSleep,
+                              Text(
+                                  userData.lang == "rus" ? tAudioListForSleep : tAudioListForSleepQaz,
                                   style: tsAudioGroupTitle),
                               SizedBox(
                                 height: heightScreen * 0.02,
@@ -221,6 +237,8 @@ class SleepScreen extends StatelessWidget {
                                       var data = snapshot.data;
                                       return (data != null && data1 != null)
                                           ? ListView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: data.length,
                                               itemBuilder: (context, index) {
@@ -257,24 +275,22 @@ class SleepScreen extends StatelessWidget {
                                                                             ),
                                                                             onPressed:
                                                                                 () {
-                                                                                  showGeneralDialog(
-                                                                                      context: context,
-                                                                                      barrierDismissible: true,
-                                                                                      barrierLabel:
-                                                                                      MaterialLocalizations.of(context)
-                                                                                          .modalBarrierDismissLabel,
-                                                                                      barrierColor: Colors.black45,
-                                                                                      pageBuilder: (BuildContext ctx,
-                                                                                          Animation animation,
-                                                                                          Animation secondaryAnimation) {
-                                                                                        return Container(
-                                                                                            width: widthScreen,
-                                                                                            height: heightScreen,
-                                                                                            color: cBackgroundColor,
-                                                                                            child: Player(audioId: data[index].id, user: userData,)
-                                                                                        );
-                                                                                      });
-                                                                                },
+                                                                              showGeneralDialog(
+                                                                                  context: context,
+                                                                                  barrierDismissible: true,
+                                                                                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                                                                                  barrierColor: Colors.black45,
+                                                                                  pageBuilder: (BuildContext ctx, Animation animation, Animation secondaryAnimation) {
+                                                                                    return Container(
+                                                                                        width: widthScreen,
+                                                                                        height: heightScreen,
+                                                                                        color: cBackgroundColor,
+                                                                                        child: Player(
+                                                                                          audioId: data[index].id,
+                                                                                          user: userData,
+                                                                                        ));
+                                                                                  });
+                                                                            },
                                                                             color:
                                                                                 cIconColor,
                                                                           )
@@ -287,19 +303,17 @@ class SleepScreen extends StatelessWidget {
                                                                                   showGeneralDialog(
                                                                                       context: context,
                                                                                       barrierDismissible: true,
-                                                                                      barrierLabel:
-                                                                                      MaterialLocalizations.of(context)
-                                                                                          .modalBarrierDismissLabel,
+                                                                                      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
                                                                                       barrierColor: Colors.black45,
-                                                                                      pageBuilder: (BuildContext ctx,
-                                                                                          Animation animation,
-                                                                                          Animation secondaryAnimation) {
+                                                                                      pageBuilder: (BuildContext ctx, Animation animation, Animation secondaryAnimation) {
                                                                                         return Container(
                                                                                             width: widthScreen,
                                                                                             height: heightScreen,
                                                                                             color: cBackgroundColor,
-                                                                                            child: Player(audioId: data[index].id, user: userData,)
-                                                                                        );
+                                                                                            child: Player(
+                                                                                              audioId: data[index].id,
+                                                                                              user: userData,
+                                                                                            ));
                                                                                       });
                                                                                 },
                                                                                 color: cIconColor,
@@ -340,7 +354,7 @@ class SleepScreen extends StatelessWidget {
                                                                                                 Column(
                                                                                                   children: [
                                                                                                     Text(
-                                                                                                      tPremiumTitle2,
+                                                                                                      userData.lang == "rus" ? tPremiumTitle2 : tPremiumTitle2Qaz,
                                                                                                       style: tsPremiumTitle,
                                                                                                       textAlign: TextAlign.center,
                                                                                                     ),
@@ -348,7 +362,7 @@ class SleepScreen extends StatelessWidget {
                                                                                                       height: tDefaultSizeS,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                      tPremiumSubTitle2,
+                                                                                                      userData.lang  == "rus" ? tPremiumSubTitle2 : tPremiumSubTitle2Qaz,
                                                                                                       style: tsPremiumSubTitle,
                                                                                                       textAlign: TextAlign.center,
                                                                                                     ),
@@ -358,13 +372,13 @@ class SleepScreen extends StatelessWidget {
                                                                                                   children: [
                                                                                                     Container(
                                                                                                         child: Text(
-                                                                                                      "Всего за 1390тг",
+                                                                                                          userData.lang  == "rus" ? "Всего за 1390тг" : "Бар болғаны 1390 теңге",
                                                                                                       style: tsCostWhite,
                                                                                                     )),
                                                                                                     Container(
                                                                                                         transform: Matrix4.translationValues(0.0, -43.0, 0.0),
                                                                                                         child: Text(
-                                                                                                          "Всего за 1390тг",
+                                                                                                          userData.lang  == "rus" ? "Всего за 1390тг" : "Бар болғаны 1390 теңге",
                                                                                                           style: tsCost,
                                                                                                         )),
                                                                                                   ],
@@ -384,7 +398,7 @@ class SleepScreen extends StatelessWidget {
                                                                                                       Navigator.of(context).pop();
                                                                                                     },
                                                                                                     child: Text(
-                                                                                                      tPremiumButton,
+                                                                                                      userData.lang == "rus" ? tPremiumButton : tPremiumButtonQaz,
                                                                                                       style: tsButton,
                                                                                                     )),
                                                                                                 SizedBox(
@@ -406,8 +420,8 @@ class SleepScreen extends StatelessWidget {
                                                                               .start,
                                                                       children: [
                                                                         Text(
-                                                                            data[index]
-                                                                                .title,
+                                                                            userData.lang == "rus" ? data[index]
+                                                                                .title : data[index].titleQaz,
                                                                             style:
                                                                                 tsAudioTitle),
                                                                         SizedBox(
@@ -434,7 +448,7 @@ class SleepScreen extends StatelessWidget {
                                                                                 const Icon(Icons.favorite_border),
                                                                             onPressed:
                                                                                 () {
-                                                                              DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
+                                                                              DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].titleQaz, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
                                                                             },
                                                                             color:
                                                                                 cIconColor,
@@ -444,10 +458,8 @@ class SleepScreen extends StatelessWidget {
                                                                                 const Icon(Icons.favorite),
                                                                             onPressed:
                                                                                 () {
-
-                                                                                  DBService.instance.removeFavouriteByAudioId(userData.id, data[index].id);
-
-                                                                                },
+                                                                              DBService.instance.removeFavouriteByAudioId(userData.id, data[index].id);
+                                                                            },
                                                                             color:
                                                                                 cIconColor,
                                                                           )
@@ -456,16 +468,14 @@ class SleepScreen extends StatelessWidget {
                                                                             ? IconButton(
                                                                                 icon: const Icon(Icons.favorite_border),
                                                                                 onPressed: () {
-                                                                                  DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
+                                                                                  DBService.instance.setFavourite(_auth.user!.uid, data[index].id, data[index].title, data[index].titleQaz, data[index].duration, data[index].premium, data[index].image, data[index].link, data[index].category);
                                                                                 },
                                                                                 color: cIconColor,
                                                                               )
                                                                             : IconButton(
                                                                                 icon: const Icon(Icons.favorite),
                                                                                 onPressed: () {
-
                                                                                   DBService.instance.removeFavouriteByAudioId(userData.id, data[index].id);
-
                                                                                 },
                                                                                 color: cIconColor,
                                                                               )

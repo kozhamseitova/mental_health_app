@@ -26,7 +26,7 @@ class DBService {
   final String _favouritesCollection = "Favourites";
 
   Future<void> createUserInDB(
-      String uid, String name, String email, bool isPsychologist) async {
+      String uid, String name, String email, bool isPsychologist, int exp) async {
     try {
       return await _db.collection(_userCollection).doc(uid).set({
         "name": name,
@@ -36,6 +36,8 @@ class DBService {
         "last_audio": "",
         "sessions": 0,
         "minutes": 0,
+        "exp": exp,
+        "lang": "qaz",
       });
     } catch (e) {
       print(e);
@@ -54,6 +56,12 @@ class DBService {
       "minutes": minutes,
       "sessions": sessions,
       "last_audio": lastAudio,
+    });
+  }
+
+  Future<void> updateLang(String uid, String lang) {
+    return _db.collection(_userCollection).doc(uid).update({
+      "lang": lang,
     });
   }
 
@@ -107,10 +115,11 @@ class DBService {
     });
   }
 
-  Future<void> setFavourite(String uid, String a_id, String title, int duration, bool premium, String image, String link, String category) {
+  Future<void> setFavourite(String uid, String a_id, String title, String titleQaz, int duration, bool premium, String image, String link, String category) {
     return _db.collection(_userCollection).doc(uid).collection(_favouritesCollection).add({
       "a_id": a_id,
       "title": title,
+      "titleQaz": titleQaz,
       "duration": duration,
       "premium": premium,
       "image": image,
@@ -146,9 +155,10 @@ class DBService {
     });
   }
 
-  Future<void> updateRequest(String id, String status) {
+  Future<void> updateRequest(String id, String status, String statusQaz) {
     return _db.collection(_requestCollection).doc(id).update({
-      "status": status
+      "status": status,
+      "statusQaz": statusQaz
     });
   }
 
@@ -161,6 +171,7 @@ class DBService {
       "from_name": fromName,
       "description": desc,
       "status": "отправлено",
+      "statusQaz": "жіберілді",
       "contact": contact,
     });
   }

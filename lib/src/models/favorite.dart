@@ -4,6 +4,7 @@ class Favorite {
   final String id;
   final String a_id;
   final String title;
+  final String titleQaz;
   final int duration;
   final bool premium;
   final String image;
@@ -14,6 +15,7 @@ class Favorite {
     required this.id,
     required this.a_id,
     required this.title,
+    required this.titleQaz,
     required this.duration,
     required this.premium,
     required this.image,
@@ -27,6 +29,7 @@ class Favorite {
       id: snapshot.id,
       a_id: data["a_id"],
       title: data["title"],
+      titleQaz: data["titleQaz"],
       duration: data["duration"],
       premium: data["premium"],
       image: data["image"],

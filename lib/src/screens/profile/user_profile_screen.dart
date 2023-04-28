@@ -76,7 +76,7 @@ class UserProfileScreen extends StatelessWidget {
                             image: AssetImage(tUserProfileImage),
                             height: heightScreen * 0.22,
                           ),
-                          Text(tHello + userData.name + "!",
+                          Text((userData.lang == "rus" ? tHello : tHelloQaz) + userData.name + "!",
                               style: tsProfilePageTitle),
                         ],
                       ),
@@ -98,7 +98,7 @@ class UserProfileScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(tListened,
+                                Text(userData.lang == "rus" ? tListened : tListenedQaz,
                                     style: tsProfilePageContainerText),
                                 Text(
                                   userData.minutes.toString() + tMinutes,
@@ -119,10 +119,10 @@ class UserProfileScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(tFinished,
+                                Text(userData.lang == "rus" ? tFinished : tFinishedQaz,
                                     style: tsProfilePageContainerText),
                                 Text(
-                                  userData.sessions.toString() + tSessions,
+                                  userData.sessions.toString() + (userData.lang == "rus" ? tSessions : tSessionsQaz),
                                   style: tsProfilePageContainerText,
                                 )
                               ],
@@ -136,7 +136,9 @@ class UserProfileScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tRequests, style: tsProfilePageSubTitle),
+                          Text(
+                              userData.lang == "rus" ? tRequests : tRequestsQaz,
+                              style: tsProfilePageSubTitle),
                           SizedBox(
                             height: tDefaultSizeM,
                           ),
@@ -148,6 +150,7 @@ class UserProfileScreen extends StatelessWidget {
                                   ? ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: data.length,
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
@@ -198,7 +201,7 @@ class UserProfileScreen extends StatelessWidget {
                                                               ))
                                                         ],
                                                       ),
-                                                      Text(data[index].status,
+                                                      Text(userData.lang == "rus" ? data[index].status : data[index].statusQaz,
                                                           style:
                                                           (data[index].status == "принято") ? tsRequestAccepted : (data[index].status == "отказано" ) ? tsRequestRejected : tsRequestSended)
                                                     ],
@@ -226,7 +229,9 @@ class UserProfileScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tFavourites, style: tsProfilePageSubTitle),
+                          Text(
+                              userData.lang == "rus" ? tFavourites : tFavouritesQaz,
+                              style: tsProfilePageSubTitle),
                           SizedBox(
                             height: tDefaultSizeM,
                           ),
@@ -239,6 +244,7 @@ class UserProfileScreen extends StatelessWidget {
                                             size: 50,
                                       ) : ListView.builder(
                                           shrinkWrap: true,
+                                          physics: const NeverScrollableScrollPhysics(),
                                           itemCount: data.length,
                                           itemBuilder: (context, index) {
                                                 return Column(
@@ -287,7 +293,7 @@ class UserProfileScreen extends StatelessWidget {
                                                                                                     Column(
                                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                           children: [
-                                                                                                                Text(data[index].title, style: tsAudioTitle),
+                                                                                                                Text(userData.lang == "rus" ?  data[index].title : data[index].titleQaz, style: tsAudioTitle),
                                                                                                                 SizedBox(height: 3,),
                                                                                                                 Text("${(data[index].duration/60).round()}:${data[index].duration%60}", style: tsAudioSubTitle )
                                                                                                           ],

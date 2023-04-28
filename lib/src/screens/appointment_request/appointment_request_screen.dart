@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,7 +13,6 @@ import 'package:provider/provider.dart';
 
 import '../../constants/sizes.dart';
 import '../../models/user_data.dart';
-import 'app_requests.dart';
 
 class AppointmentRequestScreen extends StatelessWidget {
   AppointmentRequestScreen({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class AppointmentRequestScreen extends StatelessWidget {
   Widget appointmentPageUI(double heightScreen, double widthScreen) {
     return Builder(builder: (BuildContext context) {
       var _auth = Provider.of<AuthProvider>(context);
+      Random rnd;
       return StreamBuilder<UserData>(
         stream: DBService.instance.getUserData(_auth.user!.uid),
         builder: (context, snapshot) {
@@ -57,9 +59,11 @@ class AppointmentRequestScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(tAppointmentRequestTitle,
+                          Text(
+                              userData.lang == "rus" ? tAppointmentRequestTitle : tAppointmentRequestTitleQaz,
                               style: tsAppRequestPageTitle),
-                          Text(tAppointmentRequestSubTitle,
+                          Text(
+                              userData.lang == "rus" ? tAppointmentRequestSubTitle : tAppointmentRequestSubTitleQaz,
                               style: tsAppRequestPageSubTitle),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -86,9 +90,30 @@ class AppointmentRequestScreen extends StatelessWidget {
                           print(data);
                           return (data != null) ?  ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: data.length,
                               itemBuilder: (context, index) {
+
                                 final item = data[index];
+                                String expWord;
+                                if (userData.lang == "rus") {
+                                  expWord = "лет";
+                                  if ((item.exp % 10 == 1) &&
+                                      (item.exp != 11)) {
+                                    expWord = "год";
+                                  } else if ((item.exp % 10 > 1) &&
+                                      (item.exp % 10 < 5) && (item.exp != 12) &&
+                                      (item.exp != 13) && item.exp != 14) {
+                                    expWord = "года";
+                                  }
+                                } else {
+                                  expWord = "жыл";
+                                }
+
+                                rnd = new Random();
+                                int r = 1 + rnd.nextInt(5 - 1);
+                                print(r);
+
                                 return Column(
                                   children: [
                                     Container(
@@ -102,7 +127,7 @@ class AppointmentRequestScreen extends StatelessWidget {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Image(image: AssetImage(tDoctor), height: 90,),
+                                            Image(image: AssetImage("assets/images/appointment_request_page/doctor${r.toString()}.jpg"), height: 90,),
                                             Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,7 +136,7 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(item.name, style: tsRequestTitle,),
-                                                    Text("3 года опыта", style: tsStorySubTitle,)
+                                                    Text("${userData.lang == "rus" ? "Стаж": "Тәжірибе"} ${item.exp} $expWord", style: tsStorySubTitle,)
                                                   ],
                                                 ),
                                                 Container(
@@ -132,7 +157,7 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                                   padding: EdgeInsets.all(tDefaultSizeM),
                                                                   child: Column(
                                                                     children: [
-                                                                      Text(tDialog),
+                                                                      Text(userData.lang == "rus" ? tDialog : tDialogQaz),
                                                                       TextFormField(
                                                                         controller: _controllerContact,
                                                                         decoration: const InputDecoration(
@@ -144,9 +169,9 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                                       ),
                                                                       TextFormField(
                                                                         controller: _controllerDesc,
-                                                                        decoration: const InputDecoration(
-                                                                          labelText: tProblem,
-                                                                          hintText: tProblem,
+                                                                        decoration:  InputDecoration(
+                                                                          labelText: userData.lang == "rus" ? tProblem : tProblemQaz,
+                                                                          hintText: userData.lang == "rus" ? tProblem : tProblemQaz,
                                                                           enabledBorder: UnderlineInputBorder(
                                                                             borderSide: BorderSide(width: 1.0, color: Colors.grey),
                                                                           ),),
@@ -168,7 +193,7 @@ class AppointmentRequestScreen extends StatelessWidget {
 
 
                                                                         },
-                                                                        child: Text(tApply, style: tsApply,),
+                                                                        child: Text(userData.lang  == "rus" ? tApply : tApplyQaz, style: tsApply,),
                                                                         style: ButtonStyle(
                                                                           shape: MaterialStateProperty.all(
                                                                             RoundedRectangleBorder(
@@ -187,7 +212,7 @@ class AppointmentRequestScreen extends StatelessWidget {
 
 
                                                     },
-                                                    child: Text(tApply, style: tsApply,),
+                                                    child: Text(userData.lang == "rus" ? tApply : tApplyQaz, style: tsApply,),
                                                     style: ButtonStyle(
                                                       shape: MaterialStateProperty.all(
                                                         RoundedRectangleBorder(

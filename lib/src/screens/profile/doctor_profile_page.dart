@@ -62,7 +62,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     ),
                     Row(
                       children: [
-                        Text(tHelloDoctor + userData.name + "!",
+                        Text(userData.lang == "rus" ? tHelloDoctor : tHelloDoctorQaz + userData.name + "!",
                             style: tsProfilePageTitle)
                       ],
                     ),
@@ -84,7 +84,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     Row(
                       children: [
                         Text(
-                          tRequests,
+                          userData.lang == "rus" ? tRequests : tRequestsQaz,
                           style: tsProfilePageSubTitle,
                         )
                       ],
@@ -109,7 +109,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 });
                               },
                               child: Text(
-                                tIncoming,
+                                userData.lang == "rus" ? tIncoming : tIncomingQaz,
                                 style: tsRequestGroupTitle,
                               )),
                         ),
@@ -127,7 +127,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 });
                               },
                               child: Text(
-                                tAccepted,
+                                userData.lang == "rus" ? tAccepted : tAcceptedQaz,
                                 style: tsRequestGroupTitle,
                               )),
                         )
@@ -211,7 +211,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                                                 onPressed:
                                                                     () {
 
-                                                                        DBService.instance.updateRequest(item.id, "принято");
+                                                                        DBService.instance.updateRequest(item.id, "принято", "қабылданды");
 
                                                                     },
                                                                 color:
@@ -226,7 +226,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                                                 onPressed:
                                                                     () {
 
-                                                                      DBService.instance.updateRequest(item.id, "отказано");
+                                                                      DBService.instance.updateRequest(item.id, "отказано", "бас тартылды");
 
 
                                                                     },
@@ -330,7 +330,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                                   ],
                                                 )
                                                     : Text(
-                                                  item.status,
+                                                  userData.lang == "rus" ? item.status : item.statusQaz,
                                                   style:
                                                   tsRequestAccepted,
                                                 )

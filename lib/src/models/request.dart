@@ -9,6 +9,7 @@ class AppointmentRequest {
   String from;
   String to;
   String status;
+  String statusQaz;
   String contact;
   String fromName;
   String toName;
@@ -19,6 +20,7 @@ class AppointmentRequest {
     required this.from,
     required this.to,
     required this.status,
+    required this.statusQaz,
     required this.contact,
     required this.fromName,
     required this.toName,
@@ -33,6 +35,7 @@ class AppointmentRequest {
       from: data["from"],
       to: data["to"],
       status: data["status"],
+      statusQaz: data["statusQaz"],
       contact: data["contact"],
       fromName: data["from_name"],
       toName: data["to_name"],

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:mental_health_app/src/features/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 import 'package:mental_health_app/src/constants/image_strings.dart';
 import 'package:mental_health_app/src/constants/text_strings.dart';
 import 'package:mental_health_app/src/providers/auth_provider.dart';
+import 'package:mental_health_app/src/services/cloud_storage_service.dart';
 import 'package:mental_health_app/src/services/db_service.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerExp = TextEditingController();
 
   bool passwordVisible = false;
 
@@ -68,14 +71,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: Text("Ошибка регистрации"),
+            title: Text("Тіркеу қатесі"),
             content: Text(msg),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.of(ctx).pop();
                   },
-                  child: Text("OK", style: tsAudioSubTitle,))
+                  child: Text(
+                    "OK",
+                    style: tsAudioSubTitle,
+                  ))
             ],
           );
         });
@@ -122,16 +128,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          tSignUp,
+                          tSignUpQaz,
                           style: tsLoginTitle,
                         ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        tRegisterSubTitle,
-                        style: tsLoginSubTitle,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          tRegisterSubTitleQaz,
+                          style: tsLoginSubTitle,
+                        ),
                       ),
                     ],
                   ),
@@ -143,8 +152,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.person_outline_outlined),
-                          labelText: tName,
-                          hintText: tName,
+                          labelText: tNameQaz,
+                          hintText: tNameQaz,
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1.0, color: Colors.grey),
@@ -168,8 +177,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscureText: passwordVisible,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.fingerprint),
-                          labelText: tPassword,
-                          hintText: tPassword,
+                          labelText: tPasswordQaz,
+                          hintText: tPasswordQaz,
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1.0, color: Colors.grey),
@@ -197,11 +206,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           Text(
-                            tPsychologist,
+                            tPsychologistQaz,
                             style: tsPsychologist,
                           )
                         ],
-                      )
+                      ),
+                      if (isPsychologist)
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.star),
+                            labelText: tExpQaz,
+                            hintText: "Ваш опыт в годах",
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 1.0, color: Colors.grey),
+                            ),
+                          ),
+                          controller: _controllerExp,
+                        ),
                     ],
                   ),
                   SizedBox(
@@ -209,52 +232,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Column(
                     children: [
-                      _auth.status != AuthStatus.Authenticating ? ElevatedButton(
-                          style: ButtonStyle(
-                            minimumSize:
-                            MaterialStateProperty.all(Size(275, 60)),
-                            backgroundColor:
-                            MaterialStateProperty.all(cButtonColor),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                      _auth.status != AuthStatus.Authenticating
+                          ? ElevatedButton(
+                              style: ButtonStyle(
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(275, 60)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(cButtonColor),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          onPressed: () {
-                            var name = _controllerName.text;
-                            var email = _controllerEmail.text;
-                            var password = _controllerPassword.text;
-                            if (name.isEmpty) {
-                              return showErrorMessage("Пожалуйста, напишите свое имя");
-                            }
-                            if (email.isEmpty || !email.contains("@")) {
-                              return showErrorMessage("Пожалуйста, введите валидную почту");
-                            }
-                            if (password.length < 6) {
-                              return showErrorMessage("Пароль должен состоять минимум из 6 символов");
-                            }
+                              onPressed: () {
+                                var name = _controllerName.text;
+                                var email = _controllerEmail.text;
+                                var password = _controllerPassword.text;
+                                var exp = _controllerExp.text;
+                                var expInt = 0;
+                                if (name.isEmpty) {
+                                  return showErrorMessage(
+                                      "Өз атыңызды жазыңыз");
+                                }
+                                if (email.isEmpty || !email.contains("@")) {
+                                  return showErrorMessage(
+                                      "Жарамды поштаны енгізіңіз");
+                                }
+                                if (password.length < 6) {
+                                  return showErrorMessage(
+                                      "Құпия сөз кем дегенде 6 таңбадан тұруы керек");
+                                }
+                                if (isPsychologist) {
+                                  if (exp.isEmpty || exp.length > 2) {
+                                    return showErrorMessage(
+                                      "Тәжірибеңізді енгізіңіз"
+                                    );
+                                  } else {
+                                    expInt = int.parse(exp);
+                                  }
+                                }
 
-                            _auth.registerUserWithEmailAndPassword(email, password, (String uid) async {
-                              await DBService.instance.createUserInDB(uid, name, email, isPsychologist);
-                            });
-                            if (_auth.status == AuthStatus.Error) {
-                              _controllerEmail.text = "";
-                              showErrorMessage("Пользователь с такой почтой уже существует");
-                            }
-                          },
-                          child: Text(
-                            tSignUp,
-                            style: tsButton,
-                          )) : Align(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(),
-                      ),
+                                _auth.registerUserWithEmailAndPassword(
+                                    email, password, (String uid) async {
+                                  await DBService.instance.createUserInDB(
+                                      uid, name, email, isPsychologist, expInt);
+                                });
+                                if (_auth.status == AuthStatus.Error) {
+                                  _controllerEmail.text = "";
+                                  showErrorMessage(
+                                      "Мұндай поштасы бар пайдаланушы қазірдің өзінде бар");
+                                }
+
+                              },
+                              child: Text(
+                                tSignUpQaz,
+                                style: tsButton,
+                              ))
+                          : Align(
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(),
+                            ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            tHaveAccount,
+                            tHaveAccountQQaz,
                             style: tsHaveAccount,
                           ),
                           TextButton(
@@ -265,7 +308,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       builder: (context) => LoginScreen()));
                             },
                             child: Text(
-                              tLogin,
+                              tLoginQaz,
                               style: tsSignInSmall,
                             ),
                           ),

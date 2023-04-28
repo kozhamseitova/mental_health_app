@@ -9,13 +9,15 @@ class UserData {
   final String lastAudio;
   final int minutes;
   final int sessions;
+  final int exp;
+  final String lang;
 
 
-  UserData({required this.id, required this.email, required this.name, required this.isPremium, required this.role, required this.lastAudio, required this.minutes, required this.sessions});
+  UserData({required this.id, required this.email, required this.name, required this.isPremium, required this.role, required this.lastAudio, required this.minutes, required this.sessions, required this.exp, required this.lang});
 
   factory UserData.fromFirestore(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
     print(data);
-    return UserData(id: snapshot.id, email: data["email"], name: data["name"], isPremium: data["premium"], role: data["role"], lastAudio: data["last_audio"], minutes: data["minutes"], sessions: data["sessions"]);
+    return UserData(id: snapshot.id, email: data["email"], name: data["name"], isPremium: data["premium"], role: data["role"], lastAudio: data["last_audio"], minutes: data["minutes"], sessions: data["sessions"], exp: data["exp"], lang: data["lang"]);
   }
 }

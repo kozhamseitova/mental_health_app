@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } on FirebaseAuthException catch (e) {
       showErrorMessage(
-          "Почта или пароль введены неверно. Пожалуйста, попробуйте еще");
+          "Пошта немесе құпия сөз дұрыс енгізілмеген.");
       _controllerPassword.text = "";
     }
   }
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: Text("Ошибка авторизации"),
+            title: Text("Авторизация қатесі"),
             content: Text(msg),
             actions: <Widget>[
               TextButton(
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          tLogin,
+                          tLoginQaz,
                           style: tsLoginTitle,
                         ),
                       ),
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       Text(
-                        tLoginSubTitle,
+                        tLoginSubTitleQaz,
                         style: tsLoginSubTitle,
                       ),
                     ],
@@ -147,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: passwordVisible,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.fingerprint),
-                          labelText: tPassword,
-                          hintText: tPassword,
+                          labelText: tPasswordQaz,
+                          hintText: tPasswordQaz,
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1.0, color: Colors.grey),
@@ -166,18 +166,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         controller: _controllerPassword,
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ForgetPasswordScreen()));
-                            },
-                            child: const Text(tForgetPassword)),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.centerRight,
+                      //   child: TextButton(
+                      //       onPressed: () {
+                      //         Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) =>
+                      //                     ForgetPasswordScreen()));
+                      //       },
+                      //       child: const Text(tForgetPassword)),
+                      // ),
                     ],
                   ),
                   Column(
@@ -204,28 +204,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                 var password = _controllerPassword.text;
                                 if (email.isEmpty || !email.contains("@")) {
                                   return showErrorMessage(
-                                      "Пожалуйста, введите валидную почту.");
+                                      "Жарамды поштаны енгізіңіз.");
                                 }
                                 if (password.isEmpty) {
                                   return showErrorMessage(
-                                      "Пожалуйста, введите пароль");
+                                      "Құпия сөзді енгізіңіз");
                                 }
                                 await _auth.loginUserWithEmailAndPassword(
                                     email, password);
                                 if (_auth.status == AuthStatus.Error) {
                                   showErrorMessage(
-                                      "Почта или пароль введены неверно. Пожалуйста, попробуйте еще");
+                                      "Пошта немесе құпия сөз дұрыс енгізілмеген.");
                                   _controllerPassword.text = "";
                                 }
                               },
                               child: Text(
-                                tLogin,
+                                tLoginQaz,
                                 style: tsButton,
                               )),
                       Row(
                         children: [
                           Text(
-                            tHaveAccountQ,
+                            tHaveAccountQQaz,
                             style: tsHaveAccount,
                           ),
                           TextButton(
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               NavigationService.instance.navigateToRoute(MaterialPageRoute(builder: (context) => RegisterScreen()));
                             },
                             child: Text(
-                              tSignUp,
+                              tSignUpQaz,
                               style: tsSignInSmall,
                             ),
                           ),

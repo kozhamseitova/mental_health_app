@@ -74,13 +74,14 @@ class MeditationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tMeditationZoneTitle,
+                        userData.lang == "rus" ? tMeditationZoneTitle : tMeditationZoneTitleQaz,
                         style: tsMeditationPageTitle,
                       ),
                       SizedBox(
                         height: tDefaultSizeS,
                       ),
-                      Text(tMeditationZoneSubTitle,
+                      Text(
+                          userData.lang == "rus" ? tMeditationZoneSubTitle : tMeditationZoneSubTitleQaz,
                           style: tsMeditationPageSubTitle)
                     ],
                   ),
@@ -101,7 +102,9 @@ class MeditationScreen extends StatelessWidget {
                           return (aud != null) ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(tRecentlyPlayed, style: tsAudioGroupTitle),
+                              Text(
+                                  userData.lang == "rus" ? tRecentlyPlayed : tRecentlyPlayedQaz,
+                                  style: tsAudioGroupTitle),
                               SizedBox(
                                 height: heightScreen * 0.02,
                               ),
@@ -210,8 +213,7 @@ class MeditationScreen extends StatelessWidget {
                                                       .start,
                                                   children: [
                                                     Text(
-                                                        aud
-                                                            .title,
+                                                        userData.lang == "rus" ? aud.title : aud.titleQaz,
                                                         style: tsAudioTitle, overflow: TextOverflow.ellipsis,),
                                                     SizedBox(
                                                       height:
@@ -244,7 +246,8 @@ class MeditationScreen extends StatelessWidget {
                           SizedBox(
                             height: heightScreen * 0.03,
                           ),
-                          Text(tAudioListForMeditation,
+                          Text(
+                              userData.lang == "rus" ? tAudioListForMeditation : tAudioListForMeditationQaz,
                               style: tsAudioGroupTitle),
                           SizedBox(
                             height: heightScreen * 0.02,
@@ -262,6 +265,7 @@ class MeditationScreen extends StatelessWidget {
                                     return (data != null && data1 != null)
                                         ? ListView.builder(
                                         shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
                                         itemCount: data.length,
                                         itemBuilder: (context, index) {
                                           return Column(
@@ -390,7 +394,7 @@ class MeditationScreen extends StatelessWidget {
                                                                                   Column(
                                                                                     children: [
                                                                                       Text(
-                                                                                        tPremiumTitle2,
+                                                                                        userData.lang == "rus" ? tPremiumTitle2 : tPremiumTitle2Qaz,
                                                                                         style: tsPremiumTitle,
                                                                                         textAlign: TextAlign.center,
                                                                                       ),
@@ -398,7 +402,7 @@ class MeditationScreen extends StatelessWidget {
                                                                                         height: tDefaultSizeS,
                                                                                       ),
                                                                                       Text(
-                                                                                        tPremiumSubTitle2,
+                                                                                        userData.lang == "rus" ? tPremiumSubTitle2 : tPremiumSubTitle2Qaz,
                                                                                         style: tsPremiumSubTitle,
                                                                                         textAlign: TextAlign.center,
                                                                                       ),
@@ -408,13 +412,13 @@ class MeditationScreen extends StatelessWidget {
                                                                                     children: [
                                                                                       Container(
                                                                                           child: Text(
-                                                                                            "Всего за 1390тг",
+                                                                                            userData.lang == "rus" ? "Всего за 1390 теңге" : "Бар болғаны 1390 теңге",
                                                                                             style: tsCostWhite,
                                                                                           )),
                                                                                       Container(
                                                                                           transform: Matrix4.translationValues(0.0, -43.0, 0.0),
                                                                                           child: Text(
-                                                                                            "Всего за 1390тг",
+                                                                                            userData.lang == "rus" ? "Всего за 1390 теңге" : "Бар болғаны 1390 теңге",
                                                                                             style: tsCost,
                                                                                           )),
                                                                                     ],
@@ -434,7 +438,7 @@ class MeditationScreen extends StatelessWidget {
                                                                                         Navigator.of(context).pop();
                                                                                       },
                                                                                       child: Text(
-                                                                                        tPremiumButton,
+                                                                                        userData.lang == "rus" ? tPremiumButton : tPremiumButtonQaz,
                                                                                         style: tsButton,
                                                                                       )),
                                                                                   SizedBox(
@@ -459,8 +463,7 @@ class MeditationScreen extends StatelessWidget {
                                                                     SizedBox(
                                                                       width: 220,
                                                                       child: Text(
-                                                                          data[index]
-                                                                              .title,
+                                                                          userData.lang == "rus" ? data[index].title : data[index].titleQaz,
                                                                           style: tsAudioTitle, overflow: TextOverflow.ellipsis,),
                                                                     ),
                                                                     SizedBox(
@@ -502,6 +505,8 @@ class MeditationScreen extends StatelessWidget {
                                                                         .id,
                                                                     data[index]
                                                                         .title,
+                                                                    data[index]
+                                                                        .titleQaz,
                                                                     data[index]
                                                                         .duration,
                                                                     data[index]
@@ -555,6 +560,7 @@ class MeditationScreen extends StatelessWidget {
                                                                         .id,
                                                                     data[index]
                                                                         .title,
+                                                                    data[index].titleQaz,
                                                                     data[index]
                                                                         .duration,
                                                                     data[index]

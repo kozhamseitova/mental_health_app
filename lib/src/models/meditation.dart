@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Meditation {
   final String id;
   final String title;
+  final String titleQaz;
   final int duration;
   final bool premium;
   final String image;
@@ -12,6 +13,7 @@ class Meditation {
   Meditation({
     required this.id,
     required this.title,
+    required this.titleQaz,
     required this.duration,
     required this.premium,
     required this.image,
@@ -24,6 +26,7 @@ class Meditation {
     return Meditation(
       id: snapshot.id,
       title: data["title"],
+      titleQaz: data["titleQaz"],
       duration: data["duration"],
       premium: data["premium"],
       image: data["image"],

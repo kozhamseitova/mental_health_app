@@ -147,7 +147,7 @@ class _PlayerState extends State<Player> {
                               ),
                             ),
                             SizedBox(height: 20,),
-                            DefaultTextStyle(style: tsHomePageTitle, child: Text(data.title)),
+                            DefaultTextStyle(style: tsHomePageTitle, child: Text(widget.user.lang == "rus" ?  data.title : data.titleQaz)),
                             SizedBox(height: 20,),
 
                             Slider(
