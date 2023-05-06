@@ -141,8 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         value: isRus,
                         width: 60,
                         height: 30,
-                        toggleSize: 20,
+                        toggleSize: 25,
                         padding: 0,
+                        valueFontSize: 10,
                         activeText: "Qaz",
                         inactiveText: "Rus",
                         showOnOff: true,
@@ -157,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                         width: widthScreen*0.4,
@@ -186,10 +186,44 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         )),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        (data.lastAudio == "") ? Material(
-                          child: InkWell(
+                        (data.lastAudio == "") ? InkWell(
+                          onTap: () {
+                            showGeneralDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                barrierLabel:
+                                MaterialLocalizations.of(context)
+                                    .modalBarrierDismissLabel,
+                                barrierColor: Colors.black45,
+                                pageBuilder: (BuildContext ctx,
+                                    Animation animation,
+                                    Animation secondaryAnimation) {
+                                  return Container(
+                                      width: widthScreen,
+                                      height: heightScreen,
+                                      color: cBackgroundColor,
+                                      child: Player(user: data, audioId: "qBzeW8WHtuSGmBwEMzUe",)
+                                  );
+                                });
+                          },
+                          child: Container(
+                            width: widthScreen*0.45,
+                            height: 145,
+                            padding: EdgeInsets.only(
+                                left: 5, top: tDefaultSizeS),
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(tHomePageAudio),
+                              ),
+                            ),
+                            child: Text(
+                                data.lang == "rus" ? "Начните медитировать" : "Медитацияны бастаңыз",
+                                style: tsHomePageItemTitle),
+                          ),
+                        ) : InkWell(
                             onTap: () {
                               showGeneralDialog(
                                   context: context,
@@ -205,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: widthScreen,
                                         height: heightScreen,
                                         color: cBackgroundColor,
-                                        child: Player(user: data, audioId: "zgZPM093EXyYmTVSGpSM",)
+                                        child: Player(user: data, audioId: data.lastAudio,)
                                     );
                                   });
                             },
@@ -213,60 +247,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: widthScreen*0.45,
                               height: 145,
                               padding: EdgeInsets.only(
-                                  left: 5, top: tDefaultSizeM),
+                                  left: tDefaultSizeS, top: tDefaultSizeS),
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
+                                  fit: BoxFit.fill,
                                   image: AssetImage(tHomePageAudio),
                                 ),
                               ),
                               child: Text(
-                                  data.lang == "rus" ? "Начните медитировать" : "Медитацияны бастаңыз",
+                                  data.lang == "rus" ? "Часто прослушиваемое аудио" : "Жиі тыңдалатын аудио",
                                   style: tsHomePageItemTitle),
-                            ),
-                          ),
-                        ) : Material(
-                          child: InkWell(
-                              onTap: () {
-                                showGeneralDialog(
-                                    context: context,
-                                    barrierDismissible: true,
-                                    barrierLabel:
-                                    MaterialLocalizations.of(context)
-                                        .modalBarrierDismissLabel,
-                                    barrierColor: Colors.black45,
-                                    pageBuilder: (BuildContext ctx,
-                                        Animation animation,
-                                        Animation secondaryAnimation) {
-                                      return Container(
-                                          width: widthScreen,
-                                          height: heightScreen,
-                                          color: cBackgroundColor,
-                                          child: Player(user: data, audioId: data.lastAudio,)
-                                      );
-                                    });
-                              },
-                              child: Container(
-                                width: widthScreen*0.45,
-                                height: 130,
-                                padding: EdgeInsets.only(
-                                    left: tDefaultSizeS, top: tDefaultSizeS),
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(tHomePageAudio),
-                                  ),
-                                ),
-                                child: Text(
-                                    data.lang == "rus" ? "Часто прослушиваемое аудио" : "Жиі тыңдалатын аудио",
-                                    style: tsHomePageItemTitle),
-                              )
-                          ),
+                            )
                         ),
+                        SizedBox(height: 5,),
                         Container(
                           width: widthScreen*0.45,
                           height: 90,
                           padding: EdgeInsets.only(left: tDefaultSizeS),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
+                              fit: BoxFit.fill,
                               image: AssetImage(tHomePagePremium),
                             ),
                           ),
@@ -304,54 +304,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    Material(
-                      child: InkWell(
-                        onTap: () {
-                          showGeneralDialog(
-                              context: context,
-                              barrierDismissible: true,
-                              barrierLabel:
-                              MaterialLocalizations.of(context)
-                                  .modalBarrierDismissLabel,
-                              barrierColor: Colors.black45,
-                              pageBuilder: (BuildContext ctx,
-                                  Animation animation,
-                                  Animation secondaryAnimation) {
-                                return Container(
-                                    width: widthScreen,
-                                    height: heightScreen,
-                                    color: cBackgroundColor,
-                                    child: Player(user: data, audioId: "zgZPM093EXyYmTVSGpSM",)
-                                );
-                              });
-                        },
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: 350,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(tHomePageDailyAudio),
-                                ),
+                    InkWell(
+                      onTap: () {
+                        showGeneralDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            barrierLabel:
+                            MaterialLocalizations.of(context)
+                                .modalBarrierDismissLabel,
+                            barrierColor: Colors.black45,
+                            pageBuilder: (BuildContext ctx,
+                                Animation animation,
+                                Animation secondaryAnimation) {
+                              return Container(
+                                  width: widthScreen,
+                                  height: heightScreen,
+                                  color: cBackgroundColor,
+                                  child: Player(user: data, audioId: "qBzeW8WHtuSGmBwEMzUe",)
+                              );
+                            });
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 350,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(tHomePageDailyAudio),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 17, top: 45),
-                              child: Text(
-                                data.lang == "rus" ? tAudioListForMeditation : tAudioListForMeditationQaz,
-                                style: tsHomePageDailyMeditationTitle,
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 17, top: 45),
+                            child: Text(
+                              data.lang == "rus" ? tAudioListForMeditation : tAudioListForMeditationQaz,
+                              style: tsHomePageDailyMeditationTitle,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 17, top: 64),
-                              child: Text(
-                                "5 минут",
-                                style: tsHomePageDailyMeditationSubTitle,
-                              ),
-                            )
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 17, top: 64),
+                            child: Text(
+                              "48 минут",
+                              style: tsHomePageDailyMeditationSubTitle,
+                            ),
+                          )
+                        ],
                       ),
                     )
                   ],
@@ -382,56 +380,54 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           final item = d[index];
                           return
-                            Material(
-                              child: InkWell(
-                                  onTap: () {
-                                    showGeneralDialog(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        barrierLabel:
-                                        MaterialLocalizations.of(context)
-                                            .modalBarrierDismissLabel,
-                                        barrierColor: Colors.black45,
-                                        pageBuilder: (BuildContext ctx,
-                                            Animation animation,
-                                            Animation secondaryAnimation) {
-                                          return Container(
-                                              width: widthScreen,
-                                              height: heightScreen,
-                                              color: cBackgroundColor,
-                                              child: Player(user: data, audioId: d[index].id,)
-                                          );
-                                        });
-                                  }, child: Container(
-                                padding: EdgeInsets.only(
-                                    bottom: tDefaultSizeS),
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(tHomePageRec),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(
-                                        tDefaultSizeS)),
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                      height: 12,
-                                      width: 114,
-                                      decoration: BoxDecoration(
-                                        color: cTextColor,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                                tDefaultSizeS)),
-                                      ),
-                                      child: Text(
-                                        item.title,
-                                        style: tsHomePageItemSubTitle,
-                                        textAlign: TextAlign.center,
-                                      )),
-                                ),
-                              )),
-                            );
+                            InkWell(
+                                onTap: () {
+                                  showGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      barrierLabel:
+                                      MaterialLocalizations.of(context)
+                                          .modalBarrierDismissLabel,
+                                      barrierColor: Colors.black45,
+                                      pageBuilder: (BuildContext ctx,
+                                          Animation animation,
+                                          Animation secondaryAnimation) {
+                                        return Container(
+                                            width: widthScreen,
+                                            height: heightScreen,
+                                            color: cBackgroundColor,
+                                            child: Player(user: data, audioId: d[index].id,)
+                                        );
+                                      });
+                                }, child: Container(
+                              padding: EdgeInsets.only(
+                                  bottom: tDefaultSizeS),
+                              height: 130,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(tHomePageRec),
+                                      fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(
+                                      tDefaultSizeS)),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                    height: 12,
+                                    width: 114,
+                                    decoration: BoxDecoration(
+                                      color: cTextColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              tDefaultSizeS)),
+                                    ),
+                                    child: Text(
+                                      item.title,
+                                      style: tsHomePageItemSubTitle,
+                                      textAlign: TextAlign.center,
+                                    )),
+                              ),
+                            ));
                         },
                         separatorBuilder: (context, index) =>
                             SizedBox(

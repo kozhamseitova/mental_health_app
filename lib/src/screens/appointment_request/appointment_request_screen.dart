@@ -143,7 +143,8 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                   width: widthScreen * 0.5,
                                                   child: TextButton(
                                                     onPressed: () {
-
+                                                      _controllerContact.text = "";
+                                                      _controllerDesc.text = "";
                                                      showDialog(
                                                           context: context,
                                                           builder: (context) => AlertDialog(

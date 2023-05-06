@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_app/src/constants/colors.dart';
 
 const TextStyle tsWelcomePageTitle = TextStyle(color: cTextColor, fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'Lobster');
-const TextStyle tsWelcomePageSubTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsWelcomePageSubTitle = TextStyle(color: cTextColor, fontSize: 12, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 const TextStyle tsButton = TextStyle(color: cTextColor, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Rubik');
 const TextStyle tsHaveAccount = TextStyle(color: cSubTextColor, fontSize: 10, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 const TextStyle tsSignInSmall = TextStyle(color: cTextColor, fontSize: 12, fontWeight: FontWeight.w400, fontFamily: 'Rubik');
@@ -32,8 +32,8 @@ const TextStyle tsAudioGroupTitle = TextStyle(color: cTextColor, fontSize: 12, f
 const TextStyle tsAudioTitle = TextStyle(color: cTextColor, fontSize: 11, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 const TextStyle tsAudioSubTitle = TextStyle(color: cSubTextColor, fontSize: 9, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 
-const TextStyle tsStoryTitle = TextStyle(color: cTextColor, fontSize: 8, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
-const TextStyle tsStorySubTitle = TextStyle(color: cSubTextColor, fontSize: 6, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
+const TextStyle tsStoryTitle = TextStyle(color: cTextColor, fontSize: 9, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
+const TextStyle tsStorySubTitle = TextStyle(color: cSubTextColor, fontSize: 9, fontWeight: FontWeight.w300, fontFamily: 'Rubik');
 
 const TextStyle tsProfilePageTitle = TextStyle(color: cTextColor, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
 const TextStyle tsProfilePageSubTitle = TextStyle(color: cTextColor, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Rubik');
