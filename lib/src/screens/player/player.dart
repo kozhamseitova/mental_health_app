@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,6 +29,9 @@ class _PlayerState extends State<Player> {
   Duration position = Duration.zero;
   int sessions = 0;
   int minutes = 0;
+  bool loaded = false;
+  Timer _timer = new Timer(Duration(microseconds: 1), () { });
+
 
   @override
   void initState() {
@@ -76,6 +81,14 @@ class _PlayerState extends State<Player> {
     ].join(':');
   }
 
+  _StartTimer() {
+    _timer = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        loaded = true;
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +105,7 @@ class _PlayerState extends State<Player> {
               stream: DBService.instance.getUserData(_auth.user!.uid),
               builder: (context, snapshot) {
                 var d = snapshot.data;
+
                   if (d != null) {
                     audioPlayer.onPlayerComplete.listen((event) {
                       int dur = duration.inMinutes;
@@ -109,7 +123,7 @@ class _PlayerState extends State<Player> {
                       stream: DBService.instance.getAudio(widget.audioId),
                       builder: (context, snapshot) {
                         var data = snapshot.data;
-                        while (data == null) {
+                        while (data == null){
                           return  SizedBox(
                             height: heightScreen / 2,
                             child: SpinKitWanderingCubes(
@@ -119,6 +133,16 @@ class _PlayerState extends State<Player> {
                           );
                         }
                         setAudio(data.link);
+                        _StartTimer();
+                        while (loaded == false){
+                          return  SizedBox(
+                            height: heightScreen / 2,
+                            child: SpinKitWanderingCubes(
+                              color: Colors.white,
+                              size: 50,
+                            ),
+                          );
+                        }
                         return Column(
                           children: [
                             SizedBox(height: 50,),

@@ -111,7 +111,7 @@ class AppointmentRequestScreen extends StatelessWidget {
                                 }
 
                                 rnd = new Random();
-                                int r = 1 + rnd.nextInt(5 - 1);
+                                int r = 1 + rnd.nextInt(8 - 1);
                                 print(r);
 
                                 return Column(
@@ -127,7 +127,7 @@ class AppointmentRequestScreen extends StatelessWidget {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Image(image: AssetImage("assets/images/appointment_request_page/doctor${r.toString()}.jpg"), height: 90,),
+                                            Image(image: AssetImage("assets/images/appointment_request_page/doctor${r.toString()}.png"), height: 90,),
                                             Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -143,7 +143,8 @@ class AppointmentRequestScreen extends StatelessWidget {
                                                   width: widthScreen * 0.5,
                                                   child: TextButton(
                                                     onPressed: () {
-
+                                                      _controllerContact.text = "";
+                                                      _controllerDesc.text = "";
                                                      showDialog(
                                                           context: context,
                                                           builder: (context) => AlertDialog(

@@ -375,12 +375,6 @@ class SleepScreen extends StatelessWidget {
                                                                                                           userData.lang  == "rus" ? "Всего за 1390тг" : "Бар болғаны 1390 теңге",
                                                                                                       style: tsCostWhite,
                                                                                                     )),
-                                                                                                    Container(
-                                                                                                        transform: Matrix4.translationValues(0.0, -43.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          userData.lang  == "rus" ? "Всего за 1390тг" : "Бар болғаны 1390 теңге",
-                                                                                                          style: tsCost,
-                                                                                                        )),
                                                                                                   ],
                                                                                                 ),
                                                                                                 ElevatedButton(

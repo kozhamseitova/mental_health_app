@@ -62,7 +62,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     ),
                     Row(
                       children: [
-                        Text(userData.lang == "rus" ? tHelloDoctor : tHelloDoctorQaz + userData.name + "!",
+                        Text(userData.lang == "rus" ? tHelloDoctor + userData.name + "!" : tHelloDoctorQaz + userData.name + "!",
                             style: tsProfilePageTitle)
                       ],
                     ),
